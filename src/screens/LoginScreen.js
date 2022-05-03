@@ -10,17 +10,22 @@ import {
 import Logo from "../../images/Logo.jpeg";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+
 import { auth } from "../../firebase";
-import { signInWithEmailAndPassword } from "firebase/firebase-auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
 
   const [email, setEmail] = useState(""); //update from [username, setUsername]  
   const [password, setPassword] = useState("");
+  const [emailOrPassError, setemailOrPassError] = useState(false);
 
   const { height } = useWindowDimensions();
+  const navigation = useNavigation();
+
 
   const onLoginPressed = () => {
     console.warn("Sign in");
@@ -30,11 +35,13 @@ const LoginScreen = () => {
       console.log(userCredential.user.email, ' < loggin in email');
       setEmail('');
       setPassword('');
+      setemailOrPassError(false);
+      navigation.navigate("Homepage", { navigation });
     })
     .catch((err) => {
+      setemailOrPassError(true);
       console.log(err.message);
     })
-
   };
 
   const onForgotPasswordPressed = () => {
@@ -51,6 +58,7 @@ const LoginScreen = () => {
 
   const onSignUpPressed = () => {
     console.warn("onSignUpPressed");
+    
   };
 
   return (
@@ -61,6 +69,7 @@ const LoginScreen = () => {
           style={[styles.logo, { height: height * 0.3 }]}
           resizeMode="contain"
         />
+        {emailOrPassError === true? <p> Incorrect email or password. </p> : "" }
         <CustomInput
           placeholder="Username"
           value={email}
