@@ -17,7 +17,7 @@ const App = () => {
     <NavigationContainer>
       <SafeAreaView style={styles.root}>
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="SignUp"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Login" component={LoginScreen} />

@@ -21,7 +21,7 @@ const LoginScreen = () => {
 
   const onLoginPressed = () => {
     //testing stack navigator
-    navigation.navigate("Homepage", { navigation });
+    navigation.navigate("SignUp", { navigation });
   };
 
   const onForgotPasswordPressed = () => {
