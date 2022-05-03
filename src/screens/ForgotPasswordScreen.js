@@ -11,7 +11,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
   const onResetPress = async () => {
     try {
-      const result = await sendPasswordResetEmail(auth, email);
+      await sendPasswordResetEmail(auth, email);
       setMessage("Success! Please check your email.");
     } catch (err) {
       switch (err.code) {
