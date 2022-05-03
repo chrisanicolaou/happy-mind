@@ -10,15 +10,18 @@ import {
 import Logo from "../../images/Logo.jpeg";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const { height } = useWindowDimensions();
+  const navigation = useNavigation();
 
   const onLoginPressed = () => {
-    console.warn("Sign in");
+    //testing stack navigator
+    navigation.navigate("Homepage", { navigation });
   };
 
   const onForgotPasswordPressed = () => {
