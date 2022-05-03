@@ -10,15 +10,31 @@ import {
 import Logo from "../../images/Logo.jpeg";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/firebase-auth";
+
+
 
 const LoginScreen = () => {
-  const [username, setUsername] = useState("");
+
+  const [email, setEmail] = useState(""); //update from [username, setUsername]  
   const [password, setPassword] = useState("");
 
   const { height } = useWindowDimensions();
 
   const onLoginPressed = () => {
     console.warn("Sign in");
+    
+    signInWithEmailAndPassword(auth, email, password) 
+    .then((userCredential) => {
+      console.log(userCredential.user.email, ' < loggin in email');
+      setEmail('');
+      setPassword('');
+    })
+    .catch((err) => {
+      console.log(err.message);
+    })
+
   };
 
   const onForgotPasswordPressed = () => {
@@ -47,8 +63,8 @@ const LoginScreen = () => {
         />
         <CustomInput
           placeholder="Username"
-          value={username}
-          setValue={setUsername}
+          value={email}
+          setValue={setEmail}
         />
         <CustomInput
           placeholder="Password"
