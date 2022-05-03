@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
-import SignInScreen from "./src/SignInScreen";
+import SignInScreen from "./src/screens/SignInScreen";
 
 const App = () => {
   return (
