@@ -42,6 +42,7 @@ const LoginScreen = () => {
       setemailOrPassError(true);
       console.log(err.message);
     })
+    //testing stack navigator
   };
 
   const onForgotPasswordPressed = () => {
@@ -58,6 +59,7 @@ const LoginScreen = () => {
 
   const onSignUpPressed = () => {
     console.warn("onSignUpPressed");
+    navigation.navigate('SignUp', {navigation});
     
   };
 
@@ -69,9 +71,12 @@ const LoginScreen = () => {
           style={[styles.logo, { height: height * 0.3 }]}
           resizeMode="contain"
         />
-        {emailOrPassError === true? <p> Incorrect email or password. </p> : "" }
+        <>
+          {emailOrPassError === true? <Text> Incorrect email or password. </Text> : "" }   
+        </>
+        
         <CustomInput
-          placeholder="Username"
+          placeholder="Email"
           value={email}
           setValue={setEmail}
         />
