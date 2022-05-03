@@ -47,7 +47,7 @@ const LoginScreen = () => {
   };
 
   const onForgotPasswordPressed = () => {
-    console.warn("onForgotPasswordPressed");
+    navigation.navigate("ForgotPassword", { navigation });
   };
 
   const onLoginFacebook = () => {

@@ -10,6 +10,7 @@ import HobbySwipeScreen from "./src/screens/HobbySwipeScreen";
 import GetActiveScreen from "./src/screens/GetActiveScreen";
 import MeditateScreen from "./src/screens/MeditateScreen";
 import { UserContext } from "./src/utils/UserContext";
+import ForgotPasswordScreen from "./src/screens/ForgotPasswordScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,10 @@ const App = () => {
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPasswordScreen}
+            />
             <Stack.Screen name="Homepage" component={HomepageScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen
