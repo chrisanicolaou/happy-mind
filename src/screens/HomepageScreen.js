@@ -1,10 +1,12 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../utils/UserContext";
 
 const HomepageScreen = () => {
+  const { user } = useContext(UserContext);
   return (
     <View>
-      <Text>HomepageScreen</Text>
+      <Text>Hello, {user.username}!</Text>
     </View>
   );
 };
