@@ -5,9 +5,12 @@ import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 
 import { auth } from "../../firebase";
-import { browserLocalPersistence, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  browserLocalPersistence,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
-const SignUpScreen = ({navigation}) => {
+const SignUpScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,46 +19,44 @@ const SignUpScreen = ({navigation}) => {
 
   const onRegisterPressed = () => {
     console.warn("onRegisterPressed");
-    if(password !== passwordRepeat) {
+    if (password !== passwordRepeat) {
       setError("passwords do not match!");
       return;
     }
-   
-    if(!username) {
+
+    if (!username) {
       setError("missing username");
       return;
     }
-    if(!email) {
+    if (!email) {
       setError("missing email");
       return;
     }
-    if(!password) {
+    if (!password) {
       setError("missing password");
       return;
     }
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      console.log(userCredential.user);
-      navigation.navigate('PickInterests');
-    })
-    .catch((err) => {
-      console.log(err.code);
-      switch(err.code) {
-        case "auth/invalid-email": 
-          setError("Invalid email!");
-          break;
-        case "auth/email-already-in-use":
-          setError("Email is already in use!");
-          break;
-        case "auth/weak-password":
-          setError("Password must be at least 6 characters long!");
-          break;
-    } 
+      .then((userCredential) => {
+        console.log(userCredential.user);
+        navigation.navigate("PickInterests");
+      })
+      .catch((err) => {
+        console.log(err.code);
+        switch (err.code) {
+          case "auth/invalid-email":
+            setError("Invalid email!");
+            break;
+          case "auth/email-already-in-use":
+            setError("Email is already in use!");
+            break;
+          case "auth/weak-password":
+            setError("Password must be at least 6 characters long!");
+            break;
+        }
 
-
-      // setError("fire base error");
-    })
-
+        // setError("fire base error");
+      });
   };
 
   const onLoginFacebook = () => {
@@ -93,9 +94,7 @@ const SignUpScreen = ({navigation}) => {
           setValue={setPasswordRepeat}
           secureTextEntry
         />
-        <>
-          {error === "" ?  "" : <Text> {error} </Text>}
-        </>
+        <>{error === "" ? "" : <Text> {error} </Text>}</>
         <CustomButton text="Register" onPress={onRegisterPressed} />
 
         <CustomButton
