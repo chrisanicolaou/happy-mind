@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import {
   browserLocalPersistence,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { getDoc, setDoc, doc } from "firebase/firestore";
+import { UserContext } from "../utils/UserContext";
 
 const SignUpScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -16,6 +18,8 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [error, setError] = useState("");
+
+  const { setUser } = useContext(UserContext);
 
   const onRegisterPressed = () => {
     console.warn("onRegisterPressed");
@@ -38,11 +42,20 @@ const SignUpScreen = ({ navigation }) => {
     }
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential.user);
-        navigation.navigate("PickInterests");
+        return setDoc(doc(db, "users", email), {
+          username: username,
+        });
+      })
+      .then(() => {
+        const docRef = doc(db, "users", email);
+        return getDoc(docRef);
+      })
+      .then((docSnap) => {
+        setUser(docSnap.data());
+        navigation.navigate("PickInterests", { navigation });
       })
       .catch((err) => {
-        console.log(err.code);
+        console.log(err);
         switch (err.code) {
           case "auth/invalid-email":
             setError("Invalid email!");

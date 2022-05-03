@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -11,37 +11,38 @@ import Logo from "../../images/Logo.jpeg";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { getDoc, doc } from "firebase/firestore";
 
 import { useNavigation } from "@react-navigation/native";
+import { UserContext } from "../utils/UserContext";
 
 const LoginScreen = () => {
-
-  const [email, setEmail] = useState(""); //update from [username, setUsername]  
+  const [email, setEmail] = useState(""); //update from [username, setUsername]
   const [password, setPassword] = useState("");
   const [emailOrPassError, setemailOrPassError] = useState(false);
 
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
-
+  const { setUser } = useContext(UserContext);
 
   const onLoginPressed = () => {
     console.warn("Sign in");
-    
-    signInWithEmailAndPassword(auth, email, password) 
-    .then((userCredential) => {
-      console.log(userCredential.user.email, ' < loggin in email');
-      setEmail('');
-      setPassword('');
-      setemailOrPassError(false);
-      navigation.navigate("Homepage", { navigation });
-    })
-    .catch((err) => {
-      setemailOrPassError(true);
-      console.log(err.message);
-    })
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const docRef = doc(db, "users", email);
+        return getDoc(docRef);
+      })
+      .then((docSnap) => {
+        setUser(docSnap.data());
+        navigation.navigate("Homepage", { navigation });
+      })
+      .catch((err) => {
+        setemailOrPassError(true);
+        console.log(err.message);
+      });
     //testing stack navigator
   };
 
@@ -59,8 +60,7 @@ const LoginScreen = () => {
 
   const onSignUpPressed = () => {
     console.warn("onSignUpPressed");
-    navigation.navigate('SignUp', {navigation});
-    
+    navigation.navigate("SignUp", { navigation });
   };
 
   return (
@@ -72,14 +72,14 @@ const LoginScreen = () => {
           resizeMode="contain"
         />
         <>
-          {emailOrPassError === true? <Text> Incorrect email or password. </Text> : "" }   
+          {emailOrPassError === true ? (
+            <Text> Incorrect email or password. </Text>
+          ) : (
+            ""
+          )}
         </>
-        
-        <CustomInput
-          placeholder="Email"
-          value={email}
-          setValue={setEmail}
-        />
+
+        <CustomInput placeholder="Email" value={email} setValue={setEmail} />
         <CustomInput
           placeholder="Password"
           value={password}
