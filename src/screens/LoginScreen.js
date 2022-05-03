@@ -11,13 +11,13 @@ import Logo from "../../images/Logo.jpeg";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 
-const SignInScreen = () => {
+const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const { height } = useWindowDimensions();
 
-  const onSignInPressed = () => {
+  const onLoginPressed = () => {
     console.warn("Sign in");
   };
 
@@ -25,12 +25,12 @@ const SignInScreen = () => {
     console.warn("onForgotPasswordPressed");
   };
 
-  const onSignInFacebook = () => {
-    console.warn("onSignInFacebook");
+  const onLoginFacebook = () => {
+    console.warn("onLoginFacebook");
   };
 
-  const onSignInGoogle = () => {
-    console.warn("onSignInGoogle");
+  const onLoginGoogle = () => {
+    console.warn("onLoginGoogle");
   };
 
   const onSignUpPressed = () => {
@@ -56,7 +56,7 @@ const SignInScreen = () => {
           setValue={setPassword}
           secureTextEntry={true}
         />
-        <CustomButton text="Sign In" onPress={onSignInPressed} />
+        <CustomButton text="Sign In" onPress={onLoginPressed} />
 
         <CustomButton
           text="Forgot password?"
@@ -65,13 +65,13 @@ const SignInScreen = () => {
         />
         <CustomButton
           text="Sign In with Facebook"
-          onPress={onSignInFacebook}
+          onPress={onLoginFacebook}
           bgColor="#E7EAF4"
           fgColor="#4765A9"
         />
         <CustomButton
           text="Sign In with Google"
-          onPress={onSignInGoogle}
+          onPress={onLoginGoogle}
           bgColor="#FAE9EA"
           fgColor="#DD4D44"
         />
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignInScreen;
+export default LoginScreen;
