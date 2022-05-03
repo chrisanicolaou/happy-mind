@@ -71,14 +71,6 @@ const SignUpScreen = ({navigation}) => {
     navigation.navigate("Login");
   };
 
-  const onTermsOfUsePressed = () => {
-    console.warn("onTermsOfUsePressed");
-  };
-
-  const onPrivacyPressed = () => {
-    console.warn("onPrivacyPressed");
-  };
-
   return (
     <ScrollView>
       <View style={styles.root}>
@@ -106,16 +98,6 @@ const SignUpScreen = ({navigation}) => {
         </>
         <CustomButton text="Register" onPress={onRegisterPressed} />
 
-        <Text style={styles.text}>
-          By registering, you confirm that you accept our{" "}
-          <Text style={styles.link} onPress={onTermsOfUsePressed}>
-            Terms of Use
-          </Text>{" "}
-          and{" "}
-          <Text style={styles.link} onPress={onPrivacyPressed}>
-            Privacy Policy
-          </Text>
-        </Text>
         <CustomButton
           text="Sign Up with Facebook"
           onPress={onLoginFacebook}
