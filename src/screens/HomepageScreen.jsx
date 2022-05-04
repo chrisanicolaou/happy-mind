@@ -28,7 +28,7 @@ const HomepageScreen = () => {
         </Text>
         <Text
           onPress={() => {
-            navigation.navigate("GetActive");
+            navigation.navigate("FitnessOptions");
           }}
           style={style.tap}
         >
