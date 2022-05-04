@@ -4,6 +4,7 @@ import { UserContext } from "../utils/UserContext";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigation } from "@react-navigation/native";
+import { fetchHobbiesByInterest } from "../utils/api";
 
 const PickInterestsScreen = () => {
   const { user } = useContext(UserContext);
@@ -11,15 +12,25 @@ const PickInterestsScreen = () => {
   const navigation = useNavigation();
 
   const onInterestPress = async (interest) => {
-    console.log(interest, " < interest");
-    const querySnap = await getDocs(collection(db, interest));
-    querySnap.forEach((doc) => {
-      setHobbiesArray((currentHobbies) => {
-        currentHobbies.push(doc.data());
-        return currentHobbies;
-      });
-    });
-    navigation.navigate("HobbySwipe", { hobbiesArray });
+    //Refactored - see api.js for details
+    try {
+      const hobbiesArr = await fetchHobbiesByInterest(interest);
+      setHobbiesArray(hobbiesArr);
+      console.log(hobbiesArr);
+      navigation.navigate("HobbySwipe", { hobbiesArray });
+    } catch (err) {
+      console.log(err);
+    }
+
+    //----------OLD CODE BELOW----------
+    // const querySnap = await getDocs(collection(db, interest));
+    // querySnap.forEach((doc) => {
+    //   setHobbiesArray((currentHobbies) => {
+    //     currentHobbies.push(doc.data());
+    //     return currentHobbies;
+    //   });
+    // });
+    // navigation.navigate("HobbySwipe", { hobbiesArray });
   };
 
   //Needs styling! Feel free to change "Touchable Opacity" to CustomButtons. As long as onPress={() =>  onInterestsPress(interestName)} is kept, it will work fine.
