@@ -54,7 +54,7 @@ const SignUpScreen = () => {
       })
       .then((docSnap) => {
         setUser(docSnap.data());
-        navigation.navigate("PickInterests");
+        navigation.navigate("Homepage");
       })
       .catch((err) => {
         switch (err.code) {
