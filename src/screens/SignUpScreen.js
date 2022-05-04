@@ -107,7 +107,7 @@ const SignUpScreen = ({ navigation }) => {
           setValue={setPasswordRepeat}
           secureTextEntry
         />
-        <>{error === "" ? "" : <Text> {error} </Text>}</>
+        <>{error === "" ? null : <Text> {error} </Text>}</>
         <CustomButton text="Register" onPress={onRegisterPressed} />
 
         <CustomButton

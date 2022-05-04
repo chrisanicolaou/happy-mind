@@ -74,9 +74,7 @@ const LoginScreen = () => {
         <>
           {emailOrPassError === true ? (
             <Text> Incorrect email or password. </Text>
-          ) : (
-            ""
-          )}
+          ) : null}
         </>
 
         <CustomInput placeholder="Email" value={email} setValue={setEmail} />
