@@ -2,16 +2,36 @@ import { View, Text, StyleSheet } from "react-native";
 import React, { useContext } from "react";
 import { UserContext } from "../utils/UserContext";
 
-const HomepageScreen = () => {
+const HomepageScreen = ({ navigation }) => {
   const { user } = useContext(UserContext);
   return (
     <View style={style.body}>
       <Text style={style.headerText}>Welcome, {user.username} 😊!</Text>
       <View style={style.tapWrapper}>
-        <Text style={style.tap}> Do something new</Text>
-        <Text style={style.tap}> Meditate</Text>
-        <Text style={style.tap}> Get active!</Text>
-        <Text style={style.tap}> Settings</Text>
+        <Text
+          onPress={() => {
+            navigation.navigate("HobbySwipe");
+          }}
+          style={style.tap}
+        >
+          Do something new
+        </Text>
+        <Text
+          onPress={() => {
+            navigation.navigate("Meditate");
+          }}
+          style={style.tap}
+        >
+          Meditate
+        </Text>
+        <Text
+          onPress={() => {
+            navigation.navigate("GetActive");
+          }}
+          style={style.tap}
+        >
+          Get active!
+        </Text>
       </View>
     </View>
   );
