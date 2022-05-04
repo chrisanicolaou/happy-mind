@@ -37,30 +37,24 @@ const LoginScreen = () => {
       })
       .then((docSnap) => {
         setUser(docSnap.data());
-        navigation.navigate("Homepage", { navigation });
+        navigation.navigate("Homepage");
       })
       .catch((err) => {
         setemailOrPassError(true);
-        console.log(err.message);
       });
     //testing stack navigator
   };
 
   const onForgotPasswordPressed = () => {
-    navigation.navigate("ForgotPassword", { navigation });
+    navigation.navigate("ForgotPassword");
   };
 
-  const onLoginFacebook = () => {
-    console.warn("onLoginFacebook");
-  };
+  const onLoginFacebook = () => {};
 
-  const onLoginGoogle = () => {
-    console.warn("onLoginGoogle");
-  };
+  const onLoginGoogle = () => {};
 
   const onSignUpPressed = () => {
-    console.warn("onSignUpPressed");
-    navigation.navigate("SignUp", { navigation });
+    navigation.navigate("SignUp");
   };
 
   return (

@@ -4,10 +4,12 @@ import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import { auth } from "../../firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
+import { useNavigation } from "@react-navigation/native";
 
-const ForgotPasswordScreen = ({ navigation }) => {
+const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const navigation = useNavigation();
 
   const onResetPress = async () => {
     try {
