@@ -21,6 +21,9 @@ const PickInterestsScreen = ({ navigation }) => {
     navigation.navigate("HobbySwipe", { navigation });
   };
 
+  //Needs styling! Feel free to change "Touchable Opacity" to CustomButtons. As long as onPress={() =>  onInterestsPress(interestName)} is kept, it will work fine.
+  //Available for a Zoom if any q's
+
   return (
     <View style={styles.container}>
       <Text>Hello, {user.username}!</Text>
