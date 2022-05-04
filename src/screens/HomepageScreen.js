@@ -6,7 +6,7 @@ const HomepageScreen = () => {
   const { user } = useContext(UserContext);
   return (
     <View>
-      <Text>Hello, {user.username}!</Text>
+      <h2>Hello, {user.username}!</h2>
     </View>
   );
 };
