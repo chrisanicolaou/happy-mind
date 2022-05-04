@@ -11,14 +11,16 @@ import {
 } from "firebase/auth";
 import { getDoc, setDoc, doc } from "firebase/firestore";
 import { UserContext } from "../utils/UserContext";
+import { useNavigation } from "@react-navigation/native";
 
-const SignUpScreen = ({ navigation }) => {
+const SignUpScreen = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [error, setError] = useState("");
 
+  const navigation = useNavigation();
   const { setUser } = useContext(UserContext);
 
   const onRegisterPressed = () => {
@@ -52,10 +54,9 @@ const SignUpScreen = ({ navigation }) => {
       })
       .then((docSnap) => {
         setUser(docSnap.data());
-        navigation.navigate("PickInterests", { navigation });
+        navigation.navigate("PickInterests");
       })
       .catch((err) => {
-        console.log(err);
         switch (err.code) {
           case "auth/invalid-email":
             setError("Invalid email!");
@@ -72,16 +73,11 @@ const SignUpScreen = ({ navigation }) => {
       });
   };
 
-  const onLoginFacebook = () => {
-    console.warn("onLoginFacebook");
-  };
+  const onLoginFacebook = () => {};
 
-  const onLoginGoogle = () => {
-    console.warn("onLoginGoogle");
-  };
+  const onLoginGoogle = () => {};
 
   const onSignInPressed = () => {
-    console.warn("onSignUpPressed");
     navigation.navigate("Login");
   };
 
@@ -147,7 +143,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: "bold",
     color: "#051C60",
-    margin: "10",
+    margin: 10,
   },
   text: {
     color: "gray",

@@ -3,10 +3,12 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../utils/UserContext";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
+import { useNavigation } from "@react-navigation/native";
 
-const PickInterestsScreen = ({ navigation }) => {
+const PickInterestsScreen = () => {
   const { user } = useContext(UserContext);
   const [hobbiesArray, setHobbiesArray] = useState([]);
+  const navigation = useNavigation();
 
   const onInterestPress = async (interest) => {
     console.log(interest, " < interest");
@@ -17,8 +19,7 @@ const PickInterestsScreen = ({ navigation }) => {
         return currentHobbies;
       });
     });
-    console.log(hobbiesArray);
-    navigation.navigate("HobbySwipe", { navigation });
+    navigation.navigate("HobbySwipe", { hobbiesArray });
   };
 
   //Needs styling! Feel free to change "Touchable Opacity" to CustomButtons. As long as onPress={() =>  onInterestsPress(interestName)} is kept, it will work fine.
