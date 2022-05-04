@@ -34,7 +34,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
   return (
     <View style={styles.root}>
-      <>{message === "" ? null : message}</>
+      <>{message === "" ? null : <Text>{message}</Text>}</>
       <CustomInput placeholder="Email" value={email} setValue={setEmail} />
       <CustomButton text="Send Reset Link" onPress={onResetPress} />
       <CustomButton
