@@ -21,7 +21,7 @@ const App = () => {
       <UserContext.Provider value={{ user, setUser }}>
         <SafeAreaView style={styles.root}>
           <Stack.Navigator
-            initialRouteName="Homepage"
+            initialRouteName="Login"
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen name="Login" component={LoginScreen} />
