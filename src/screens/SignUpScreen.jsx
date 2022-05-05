@@ -98,7 +98,7 @@ const SignUpScreen = () => {
         <Text style={styles.title}>Create an account</Text>
         <>{error === "" ? null : <Text> {error} </Text>}</>
         <CustomInput
-          placeholder="Username"
+          placeholder="Display Name"
           value={username}
           setValue={setUsername}
         />
