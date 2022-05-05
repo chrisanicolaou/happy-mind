@@ -5,6 +5,7 @@ import CustomButton from "../components/CustomButton";
 import { auth } from "../../firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
+import { resetPassword } from "../utils/api";
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
@@ -12,22 +13,31 @@ const ForgotPasswordScreen = () => {
   const navigation = useNavigation();
 
   const onResetPress = async () => {
+    //Refactored - see api.js for details
     try {
-      await sendPasswordResetEmail(auth, email);
+      await resetPassword(email);
       setMessage("Success! Please check your email.");
     } catch (err) {
-      switch (err.code) {
-        case "auth/missing-email":
-          setMessage("You haven't entered an email!");
-          break;
-        case "auth/invalid-email":
-          setMessage("Please enter a valid email address.");
-          break;
-        case "auth/user-not-found":
-          setMessage("That user doesn't appear to exist!");
-          break;
-      }
+      setMessage(err.message);
     }
+
+    //----------OLD CODE BELOW----------
+    // try {
+    //   await sendPasswordResetEmail(auth, email);
+    //   setMessage("Success! Please check your email.");
+    // } catch (err) {
+    //   switch (err.code) {
+    //     case "auth/missing-email":
+    //       setMessage("You haven't entered an email!");
+    //       break;
+    //     case "auth/invalid-email":
+    //       setMessage("Please enter a valid email address.");
+    //       break;
+    //     case "auth/user-not-found":
+    //       setMessage("That user doesn't appear to exist!");
+    //       break;
+    //   }
+    // }
   };
 
   const onSignInPressed = () => {

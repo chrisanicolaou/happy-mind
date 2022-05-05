@@ -1,12 +1,77 @@
-import db from "../../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase";
+import { doc, getDoc, getDocs, setDoc, collection } from "firebase/firestore";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 
-export const getInterests = async () => {
+export const loginUser = async (email, password) => {
   try {
-    const docRef = doc(db, "Interests", "Interests List");
+    await signInWithEmailAndPassword(auth, email, password);
+    const docRef = doc(db, "users", email);
     const docSnap = await getDoc(docRef);
-    return docSnap;
+    return docSnap.data();
   } catch (err) {
-    console.log(err);
+    switch (err.code) {
+      case "auth/invalid-email":
+        throw new Error("Please enter a valid email address.");
+
+      case "auth/user-not-found":
+        throw new Error("No account found with that email!");
+
+      default:
+        throw new Error("Incorrect email or password.");
+    }
+  }
+};
+
+export const signUpUser = async (username, email, password) => {
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    const docRef = doc(db, "users", email);
+    await setDoc(docRef, {
+      username: username,
+    });
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  } catch (err) {
+    switch (err.code) {
+      case "auth/invalid-email":
+        throw new Error("Invalid email!");
+      case "auth/email-already-in-use":
+        throw new Error("Email is already in use!");
+      case "auth/weak-password":
+        throw new Error("Password must be at least 6 characters!");
+    }
+  }
+};
+
+export const fetchHobbiesByInterest = async (interest) => {
+  try {
+    const hobbiesArr = [];
+    const querySnap = await getDocs(collection(db, interest));
+    querySnap.forEach((doc) => hobbiesArr.push(doc.data()));
+    return hobbiesArr;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+export const resetPassword = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    return;
+  } catch (err) {
+    switch (err.code) {
+      case "auth/missing-email":
+        throw new Error("You haven't entered an email!");
+
+      case "auth/invalid-email":
+        throw new Error("Please enter a valid email address.");
+
+      case "auth/user-not-found":
+        throw new Error("That user doesn't appear to exist!");
+    }
   }
 };

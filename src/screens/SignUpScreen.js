@@ -12,6 +12,7 @@ import {
 import { getDoc, setDoc, doc } from "firebase/firestore";
 import { UserContext } from "../utils/UserContext";
 import { useNavigation } from "@react-navigation/native";
+import { signUpUser } from "../utils/api";
 
 const SignUpScreen = () => {
   const [username, setUsername] = useState("");
@@ -23,54 +24,64 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
   const { setUser } = useContext(UserContext);
 
-  const onRegisterPressed = () => {
-    console.warn("onRegisterPressed");
-    if (password !== passwordRepeat) {
-      setError("passwords do not match!");
-      return;
+  const onRegisterPressed = async () => {
+    try {
+      if (password !== passwordRepeat) {
+        setError("Passwords do not match!");
+        return;
+      }
+      if (!username) {
+        setError("Please enter a display name!");
+        return;
+      }
+      if (!email) {
+        setError("Please enter your email address.");
+        return;
+      }
+      if (!password) {
+        setError("Password must be at least 6 characters!");
+        return;
+      }
+
+      //Refactored - see api.js for details
+
+      const userData = await signUpUser(username, email, password);
+      setUser(userData);
+      navigation.navigate("Homepage");
+    } catch (err) {
+      setError(err.message);
     }
 
-    if (!username) {
-      setError("missing username");
-      return;
-    }
-    if (!email) {
-      setError("missing email");
-      return;
-    }
-    if (!password) {
-      setError("missing password");
-      return;
-    }
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        return setDoc(doc(db, "users", email), {
-          username: username,
-        });
-      })
-      .then(() => {
-        const docRef = doc(db, "users", email);
-        return getDoc(docRef);
-      })
-      .then((docSnap) => {
-        setUser(docSnap.data());
-        navigation.navigate("Homepage");
-      })
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/invalid-email":
-            setError("Invalid email!");
-            break;
-          case "auth/email-already-in-use":
-            setError("Email is already in use!");
-            break;
-          case "auth/weak-password":
-            setError("Password must be at least 6 characters long!");
-            break;
-        }
+    //----------OLD CODE BELOW----------
+    // createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     return setDoc(doc(db, "users", email), {
+    //       username: username,
+    //     });
+    //   })
+    //   .then(() => {
+    //     const docRef = doc(db, "users", email);
+    //     return getDoc(docRef);
+    //   })
+    //   .then((docSnap) => {
+    //     setUser(docSnap.data());
+    //     navigation.navigate("Homepage");
+    //   })
+    //   .catch((err) => {
+    //     switch (err.code) {
+    //       case "auth/invalid-email":
+    //         setError("Invalid email!");
+    //         break;
+    //       case "auth/email-already-in-use":
+    //         setError("Email is already in use!");
+    //         break;
+    //       case "auth/weak-password":
+    //         setError("Password must be at least 6 characters!");
+    //         break;
+    //     }
 
-        // setError("fire base error");
-      });
+    //     // setError("fire base error");
+    //   });
   };
 
   const onLoginFacebook = () => {};
@@ -85,6 +96,7 @@ const SignUpScreen = () => {
     <ScrollView>
       <View style={styles.root}>
         <Text style={styles.title}>Create an account</Text>
+        <>{error === "" ? null : <Text> {error} </Text>}</>
         <CustomInput
           placeholder="Username"
           value={username}
@@ -103,7 +115,6 @@ const SignUpScreen = () => {
           setValue={setPasswordRepeat}
           secureTextEntry
         />
-        <>{error === "" ? null : <Text> {error} </Text>}</>
         <CustomButton text="Register" onPress={onRegisterPressed} />
 
         <CustomButton
