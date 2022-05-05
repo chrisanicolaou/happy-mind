@@ -40,17 +40,22 @@ const HomepageScreen = () => {
 };
 const style = StyleSheet.create({
   body: {
-    backgroundColor: "pink",
+    backgroundColor: "beige",
     flex: 1,
+    bordercolor: "black",
   },
   headerText: {
-    color: "white",
-    fontSize: 50,
+    color: "Black",
+    fontSize: 45,
     alignSelf: "center",
+    borderWidth: 4,
+    borderColor: "lightslategrey",
+    borderRadius: 100 / 2,
+    backgroundColor: "lightslategrey",
   },
   tapWrapper: {
     flex: 1,
-    padding: 50,
+    padding: 120,
     flexDirection: "row",
     flexWrap: "wrap",
   },
@@ -58,11 +63,13 @@ const style = StyleSheet.create({
     backgroundColor: "white",
     width: 150,
     height: 150,
-    margin: 2,
+    margin: 1,
     color: "black",
     lineHeight: 25,
     textAlign: "center",
     fontSize: 15,
+    borderRadius: 100 / 2,
+    backgroundColor: "coral",
   },
 });
 export default HomepageScreen;
