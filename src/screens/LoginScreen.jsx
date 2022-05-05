@@ -17,32 +17,49 @@ import { getDoc, doc } from "firebase/firestore";
 
 import { useNavigation } from "@react-navigation/native";
 import { UserContext } from "../utils/UserContext";
+import { loginUser } from "../utils/api";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState(""); //update from [username, setUsername]
   const [password, setPassword] = useState("");
-  const [emailOrPassError, setemailOrPassError] = useState(false);
+  const [emailOrPassError, setEmailOrPassError] = useState("");
 
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
   const { setUser } = useContext(UserContext);
 
-  const onLoginPressed = () => {
-    console.warn("Sign in");
+  const onLoginPressed = async () => {
+    //Refactored - see api.js for details
+    try {
+      if (!email) {
+        setEmailOrPassError("Please enter an email address.");
+        return;
+      }
+      if (!password) {
+        setEmailOrPassError("Please enter a password.");
+        return;
+      }
+      const userData = await loginUser(email, password);
+      setUser(userData);
+      navigation.navigate("Homepage");
+    } catch (err) {
+      setEmailOrPassError(err.message);
+    }
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const docRef = doc(db, "users", email);
-        return getDoc(docRef);
-      })
-      .then((docSnap) => {
-        setUser(docSnap.data());
-        navigation.navigate("Homepage");
-      })
-      .catch((err) => {
-        setemailOrPassError(true);
-      });
-    //testing stack navigator
+    //----------OLD CODE BELOW----------
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     const docRef = doc(db, "users", email);
+    //     return getDoc(docRef);
+    //   })
+    //   .then((docSnap) => {
+    //     setUser(docSnap.data());
+    //     navigation.navigate("Homepage");
+    //   })
+    //   .catch((err) => {
+    //     console.warn(err.code);
+    //     setEmailOrPassError(err.code);
+    //   });
   };
 
   const onForgotPasswordPressed = () => {
@@ -65,11 +82,7 @@ const LoginScreen = () => {
           style={[styles.logo, { height: height * 0.3 }]}
           resizeMode="contain"
         />
-        <>
-          {emailOrPassError === true ? (
-            <Text> Incorrect email or password. </Text>
-          ) : null}
-        </>
+        <>{emailOrPassError ? <Text> {emailOrPassError} </Text> : null}</>
 
         <CustomInput placeholder="Email" value={email} setValue={setEmail} />
         <CustomInput
