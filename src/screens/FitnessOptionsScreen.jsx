@@ -3,14 +3,25 @@ import { RadioButton } from "react-native-paper";
 import React, { useState } from "react";
 import CustomButton from "../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
+import { fetchExercises } from "../utils/api";
+import { shuffleArray } from "../utils/utils";
 
 const FitnessOptionsScreen = () => {
   const [workoutDifficulty, setWorkoutDifficulty] = useState("light");
   const [workoutType, setWorkoutType] = useState("cardio");
   const navigation = useNavigation();
 
-  const onWorkoutButtonPress = () => {
-    navigation.navigate("GetActive", { workoutDifficulty, workoutType });
+  const onWorkoutButtonPress = async () => {
+    try {
+      const exercisesArray = await fetchExercises(
+        workoutDifficulty,
+        workoutType
+      );
+      shuffleArray(exercisesArray);
+      navigation.navigate("GetActive", { exercisesArray: exercisesArray });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onBackButtonPress = () => {

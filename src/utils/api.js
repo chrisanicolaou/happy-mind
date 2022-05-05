@@ -47,17 +47,6 @@ export const signUpUser = async (username, email, password) => {
   }
 };
 
-export const fetchHobbiesByInterest = async (interest) => {
-  try {
-    const hobbiesArr = [];
-    const querySnap = await getDocs(collection(db, interest));
-    querySnap.forEach((doc) => hobbiesArr.push(doc.data()));
-    return hobbiesArr;
-  } catch (err) {
-    throw new Error(err);
-  }
-};
-
 export const resetPassword = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
@@ -73,5 +62,31 @@ export const resetPassword = async (email) => {
       case "auth/user-not-found":
         throw new Error("That user doesn't appear to exist!");
     }
+  }
+};
+
+export const fetchHobbiesByInterest = async (interest) => {
+  try {
+    const hobbiesArr = [];
+    const querySnap = await getDocs(collection(db, interest));
+    querySnap.forEach((doc) => hobbiesArr.push(doc.data()));
+    return hobbiesArr;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+export const fetchExercises = async (workoutDifficulty, workoutType) => {
+  try {
+    const exercisesArr = [];
+    const docRef = doc(db, workoutDifficulty, workoutType);
+    const docSnap = await getDoc(docRef);
+    const docObj = docSnap.data();
+    for (let exercise in docObj) {
+      exercisesArr.push(docObj[exercise]);
+    }
+    return exercisesArr;
+  } catch (err) {
+    throw new Error(err);
   }
 };
