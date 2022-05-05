@@ -42,10 +42,10 @@ const style = StyleSheet.create({
   body: {
     backgroundColor: "beige",
     flex: 1,
-    bordercolor: "black",
+    borderColor: "black",
   },
   headerText: {
-    color: "Black",
+    color: "black",
     fontSize: 45,
     alignSelf: "center",
     borderWidth: 4,
