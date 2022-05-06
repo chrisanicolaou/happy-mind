@@ -95,7 +95,7 @@ const SignUpScreen = () => {
   return (
     <ScrollView>
       <View style={styles.root}>
-        <Text style={styles.title}>Create an account</Text>
+        <Text style={styles.title}>Create an Account!</Text>
         <>{error === "" ? null : <Text> {error} </Text>}</>
         <CustomInput
           placeholder="Display Name"
@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
   root: {
     alignItems: "center",
     padding: 60,
+    backgroundColor: "rgba(-20, 160, 200, 0.4)",
   },
   logo: {
     width: "90%",
@@ -154,14 +155,14 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: "bold",
     color: "#051C60",
-    margin: 10,
+    margin: 4,
   },
   text: {
     color: "gray",
-    marginVertical: 10,
+    marginVertical: 30,
   },
   link: {
-    color: "#FDB075",
+    color: "#489CF9",
   },
 });
 

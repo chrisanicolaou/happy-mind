@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
 
-    padding: 15,
-    marginVertical: 5,
+    padding: 13,
+    marginVertical: 9,
 
     alignItems: "center",
     borderRadius: 5,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
 
   text_TERTIARY: {
-    color: "grey",
+    color: "black",
   },
 });
 
