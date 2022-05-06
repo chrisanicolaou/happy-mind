@@ -124,7 +124,8 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   root: {
     alignItems: "center",
-    padding: 30,
+    padding: 10,
+    backgroundColor: "rgba(100, 20, 200, 0.4)",
   },
   logo: {
     width: "90%",
