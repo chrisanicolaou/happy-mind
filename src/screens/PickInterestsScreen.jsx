@@ -13,19 +13,18 @@ import { db } from "../../firebase";
 import { useNavigation } from "@react-navigation/native";
 import { fetchHobbiesByInterest } from "../utils/api";
 import MenuItem from "../components/MenuInput";
+import { shuffleArray } from "../utils/utils";
 
 const PickInterestsScreen = () => {
   const { user } = useContext(UserContext);
-  const [hobbiesArray, setHobbiesArray] = useState([]);
   const navigation = useNavigation();
 
   const onInterestPress = async (interest) => {
     //Refactored - see api.js for details
     try {
       const hobbiesArr = await fetchHobbiesByInterest(interest);
-      setHobbiesArray(hobbiesArr);
-      console.log(hobbiesArr);
-      navigation.navigate("HobbySwipe", { hobbiesArray });
+      shuffleArray(hobbiesArr);
+      navigation.navigate("HobbySwipe", { hobbiesArr: hobbiesArr });
     } catch (err) {
       console.log(err);
     }
@@ -50,7 +49,9 @@ const PickInterestsScreen = () => {
       style={styles.container}
     >
       <View style={styles.top}>
-        <Text style={styles.header}>Hello, {user.username}!</Text>
+        <Text style={styles.header}>
+          Hello, {user.username ? user.username : null}!
+        </Text>
         <Text style={styles.header}>Pick your Interests!</Text>
       </View>
 
