@@ -124,13 +124,14 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   root: {
     alignItems: "center",
-    padding: 10,
+    padding: 50,
     backgroundColor: "rgba(100, 20, 200, 0.4)",
+    marginVertical: -40,
   },
   logo: {
     width: "90%",
-    maxWidth: 300,
-    maxHeight: 200,
+    maxWidth: "300%",
+    maxHeight: "200%",
   },
 });
 
