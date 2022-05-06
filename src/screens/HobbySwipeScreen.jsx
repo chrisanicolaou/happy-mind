@@ -17,7 +17,6 @@ const HobbySwipeScreen = ({ route }) => {
   const [currIndex, SetCurrIndex] = useState(0);
   const [hobbies, setHobbies] = useState(hobbiesArr);
   const carousel = useRef(null);
-  const [card, setCard] = useState({});
   const [isViewingDetails, setIsViewingDetails] = useState(false);
 
   const renderItem = (item, index) => {
@@ -84,7 +83,7 @@ const HobbySwipeScreen = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 50 }}>
+    <SafeAreaView style={{ flex: 1, paddingTop: "30%" }}>
       <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
         <Carousel
           lockScrollWhileSnapping={true}
