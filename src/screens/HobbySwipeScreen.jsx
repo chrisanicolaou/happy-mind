@@ -11,6 +11,7 @@ import { Avatar, Card, Paragraph, Title } from "react-native-paper";
 import CustomButton from "../components/CustomButton";
 import GestureRecognizer from "react-native-swipe-gestures";
 import Carousel from "react-native-snap-carousel";
+import { useNavigation } from "@react-navigation/native";
 
 const HobbySwipeScreen = ({ route }) => {
   const { hobbiesArr } = route.params;
@@ -18,6 +19,7 @@ const HobbySwipeScreen = ({ route }) => {
   const [hobbies, setHobbies] = useState(hobbiesArr);
   const carousel = useRef(null);
   const [isViewingDetails, setIsViewingDetails] = useState(false);
+  const navigation = useNavigation();
 
   const renderItem = (item, index) => {
     if (!isViewingDetails || item.index !== currIndex) {
@@ -82,6 +84,10 @@ const HobbySwipeScreen = ({ route }) => {
     setIsViewingDetails(!isViewingDetails);
   };
 
+  const onBackButtonPress = () => {
+    navigation.navigate("Homepage");
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: "30%" }}>
       <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
@@ -100,6 +106,12 @@ const HobbySwipeScreen = ({ route }) => {
           }}
         />
       </View>
+      <CustomButton
+        text="Back"
+        bgColor="#E7EAF4"
+        fgColor="#4765A9"
+        onPress={onBackButtonPress}
+      />
     </SafeAreaView>
   );
 };
