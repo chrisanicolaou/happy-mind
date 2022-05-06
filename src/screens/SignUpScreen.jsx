@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   root: {
     alignItems: "center",
     padding: 60,
-    backgroundColor: "rgba(-20, 160, 200, 0.4)",
+    backgroundColor: "rgba(rgba(100, 20, 200, 0.4))",
   },
   logo: {
     width: "90%",
