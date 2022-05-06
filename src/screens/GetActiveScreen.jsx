@@ -5,19 +5,22 @@ import {
   StyleSheet,
   Linking,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import CustomButton from "../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import GestureRecognizer, {
   swipeDirections,
 } from "react-native-swipe-gestures";
+import Carousel from "react-native-snap-carousel";
 
 const GetActiveScreen = ({ route }) => {
   const { exercisesArray } = route.params;
   const [exercises, setExercises] = useState(exercisesArray);
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigation = useNavigation();
+  const carousel = useRef(null);
 
   const onFinishExercisePress = () => {
     navigation.navigate("Homepage");
@@ -27,42 +30,53 @@ const GetActiveScreen = ({ route }) => {
     setCurrentIndex((currIndex) => currIndex + num);
   };
 
-  const onSwipeRight = () => {
-    if (currentIndex !== 0) changeIndex(-1);
-  };
-  const onSwipeLeft = () => {
-    if (currentIndex !== exercises.length - 1) changeIndex(1);
-  };
-
-  return (
-    <GestureRecognizer onSwipeRight={onSwipeRight} onSwipeLeft={onSwipeLeft}>
-      <View style={styles.root}>
-        <Text>{exercises[currentIndex].name}</Text>
+  const renderItem = ({ item, index }) => {
+    return (
+      <View>
+        <Text>{item.name}</Text>
         <View style={styles.flexWrap}>
           <Image
             style={{ ...styles.flexItems, width: 250, height: 250 }}
-            source={{ uri: exercises[currentIndex].picture }}
+            source={{ uri: item.picture }}
           ></Image>
         </View>
-        <Text>{exercises[currentIndex].description}</Text>
+        <Text>{item.description}</Text>
         <Text>-----------------------</Text>
-        <Text>Step One: {exercises[currentIndex].stepOne}</Text>
-        <Text>Step Two: {exercises[currentIndex].stepTwo}</Text>
-        <Text>Step Three: {exercises[currentIndex].stepThree}</Text>
+        <Text>Step One: {item.stepOne}</Text>
+        <Text>Step Two: {item.stepTwo}</Text>
+        <Text>Step Three: {item.stepThree}</Text>
         <CustomButton
           text="Watch Exercise Video"
-          onPress={() => Linking.openURL(exercises[currentIndex].howToLink)}
-          bgColor="#E7EAF4"
-          fgColor="#4765A9"
-        ></CustomButton>
-        <CustomButton
-          text="Finish Exercising"
-          onPress={onFinishExercisePress}
+          onPress={() => Linking.openURL(item.howToLink)}
           bgColor="#E7EAF4"
           fgColor="#4765A9"
         ></CustomButton>
       </View>
-    </GestureRecognizer>
+    );
+  };
+
+  return (
+    <SafeAreaView style={{ flex: 1, paddingTop: "30%" }}>
+      <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
+        <Carousel
+          lockScrollWhileSnapping={true}
+          swipeThreshold={10}
+          layout={"default"}
+          ref={carousel}
+          data={exercises}
+          sliderWidth={380}
+          itemWidth={300}
+          renderItem={renderItem}
+          onSnapToItem={(index) => setCurrentIndex(index)}
+        />
+      </View>
+      <CustomButton
+        text="Finish Exercising"
+        onPress={onFinishExercisePress}
+        bgColor="#E7EAF4"
+        fgColor="#4765A9"
+      ></CustomButton>
+    </SafeAreaView>
   );
 };
 
