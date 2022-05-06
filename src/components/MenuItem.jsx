@@ -12,8 +12,6 @@ const MenuItem = ({ itemImage, text }) => {
 
 const styles = StyleSheet.create({
   menuItem: {
-    width: "200%",
-    height: "50%",
     padding: 0,
     backgroundColor: "rgba(255,255,255, .01)",
   },
@@ -28,6 +26,7 @@ const styles = StyleSheet.create({
   heading: {
     color: "#fff",
     fontSize: 20,
+    textAlign: "center",
   },
 });
 

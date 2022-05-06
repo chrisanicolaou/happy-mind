@@ -12,7 +12,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigation } from "@react-navigation/native";
 import { fetchHobbiesByInterest } from "../utils/api";
-import MenuItem from "../components/MenuInput";
+import MenuItem from "../components/MenuItem";
 import { shuffleArray } from "../utils/utils";
 
 const PickInterestsScreen = () => {
@@ -56,29 +56,74 @@ const PickInterestsScreen = () => {
       </View>
 
       <View style={styles.menuContainer}>
-        <TouchableOpacity onPress={() => onInterestPress("languages")}>
+        <TouchableOpacity
+          onPress={() => onInterestPress("languages")}
+          style={styles.buttonItem}
+        >
           <MenuItem
             text={"Languages"}
             itemImage={require("../../images/Languages.jpeg")}
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onInterestPress("art")}>
+        <TouchableOpacity
+          onPress={() => onInterestPress("art")}
+          style={styles.buttonItem}
+        >
           <MenuItem text={"Art"} itemImage={require("../../images/Art.jpeg")} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onInterestPress("gaming")}>
+        <TouchableOpacity
+          onPress={() => onInterestPress("gaming")}
+          style={styles.buttonItem}
+        >
           <MenuItem
             text={"Gaming"}
             itemImage={require("../../images/Gaming.jpeg")}
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onInterestPress("sports")}>
+        <TouchableOpacity
+          onPress={() => onInterestPress("sports")}
+          style={styles.buttonItem}
+        >
           <MenuItem
             text={"Sports"}
             itemImage={require("../../images/Football.jpeg")}
           />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => onInterestPress("sports")}
+          style={styles.buttonItem}
+        >
+          <MenuItem
+            text={"Music"}
+            itemImage={require("../../images/Music.jpg")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => onInterestPress("sports")}
+          style={styles.buttonItem}
+        >
+          <MenuItem
+            text={"Coding"}
+            itemImage={require("../../images/Coding.jpg")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => onInterestPress("sports")}
+          style={styles.buttonItem}
+        >
+          <MenuItem
+            text={"Science"}
+            itemImage={require("../../images/Science.jpg")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => onInterestPress("sports")}
+          style={styles.buttonItem}
+        >
+          <MenuItem text={"DIY"} itemImage={require("../../images/DIY.png")} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -92,7 +137,8 @@ const styles = StyleSheet.create({
     height: "130%",
   },
   top: {
-    height: "30%",
+    height: "20%",
+    marginTop: "10%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -109,9 +155,19 @@ const styles = StyleSheet.create({
   menuContainer: {
     height: "70%",
     width: "50%",
-    flexDirection: "row",
+    flexDirection: "column",
     flexWrap: "wrap",
-    padding: 20,
+    padding: "5%",
+    paddingLeft: "10%",
+    paddingBottom: "2%",
+    justifyContent: "space-between",
+  },
+  buttonItem: {
+    marginRight: "70%",
+    marginBottom: "22%",
+    padding: 0,
+    width: 100,
+    height: 100,
   },
 });
 
