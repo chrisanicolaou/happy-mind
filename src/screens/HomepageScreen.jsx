@@ -1,16 +1,30 @@
 import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../utils/UserContext";
 import { useNavigation } from "@react-navigation/native";
+
+import { useFonts } from "@use-expo/font";
+import { AppLoading } from "expo-app-loading";
 
 const HomepageScreen = () => {
   const { user } = useContext(UserContext);
   const navigation = useNavigation();
 
+  //custom fonts 
+  let [fontsLoaded] = useFonts({
+    'OleoScript-Regular': require('../../assets/fonts/OleoScript-Regular.ttf'),
+    'TitanOne-Regualar': require('../../assets/fonts/TitanOne-Regular.ttf')
+  })
+  if(!fontsLoaded) {
+    <AppLoading/>
+  }
+
   const Header = () => {
     return (
       <View style={styles.header}>
-        <Text style={styles.title}> Welcome <Text style={styles.name}>{user.username} </Text>😊 </Text>
+        {/* <Text style={styles.name}>{user.username} </Text> */}
+        {/* <LoadFonts/> */}
+        <Text style={styles.title}> Welcome {user.username} </Text>
       </View>
     )
   }
@@ -22,14 +36,14 @@ const HomepageScreen = () => {
         <TouchableOpacity style={styles.box} onPress={() =>  navigation.navigate("PickInterests")}>
         <Text style={styles.boxheader}> INTERESTS </Text>
           <View style={styles.inner}>
-          <Image style={styles.imageSetting} source={require('../../images/home-page-pics/discover.jpg')} />
+          <Image style={styles.imageSetting} source={require('../../assets/home-screen-images/Discover.jpg')} />
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('Meditate')}>
         <Text style={styles.boxheader}> MEDITATATION </Text>
           <View elevation={5} style={styles.inner}>
-          <Image style={styles.imageSetting} source={require('../../images/home-page-pics/meditate.jpg')} />
+          <Image style={styles.imageSetting} source={require('../../assets/home-screen-images/Meditation.jpg')} />
           </View>
         </TouchableOpacity>
 
@@ -37,14 +51,14 @@ const HomepageScreen = () => {
           <Text style={styles.boxheader}> ACTIVITY </Text>
 
           <View style={styles.inner}>
-          <Image style={styles.imageSetting} source={require('../../images/home-page-pics/active-lady.jpg')} />       
+          <Image style={styles.imageSetting} source={require('../../assets/home-screen-images/Activity.jpg')} />       
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.box}>
         <Text style={styles.boxheader}> SETTINGS </Text>
           <View style={styles.inner}>
-          <Image style={styles.imageSetting} source={require('../../images/home-page-pics/settings.jpg')} />       
+          <Image style={styles.imageSetting} source={require('../../assets/home-screen-images/Settings.png')} />       
           </View>
         </TouchableOpacity>
       </View>
@@ -56,38 +70,6 @@ const HomepageScreen = () => {
       <Header/>
       <Boxes/>
     </SafeAreaView>
-
-    /* old styling */
-
-    // <View style={style.body}>
-    //   <Text style={style.headerText}>Welcome, {user.username} 😊!</Text>
-    //   <View style={style.tapWrapper}>
-    //     <Text
-    //       onPress={() => {
-    //         navigation.navigate("PickInterests");
-    //       }}
-    //       style={style.tap}
-    //     >
-    //       Do something new
-    //     </Text>
-    //     <Text
-    //       onPress={() => {
-    //         navigation.navigate("Meditate");
-    //       }}
-    //       style={style.tap}
-    //     >
-    //       Meditate
-    //     </Text>
-    //     <Text
-    //       onPress={() => {
-    //         navigation.navigate("FitnessOptions");
-    //       }}
-    //       style={style.tap}
-    //     >
-    //       Get active!
-    //     </Text>
-    //   </View>
-    // </View>
   );
 };
 
@@ -95,14 +77,15 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#faa307'
+    backgroundColor: '#7bdff2'
   },
   title: {
-    fontSize: 20,
-    color: "#00171f",
+    fontSize: 30,
+    fontFamily: 'OleoScript-Regular',
+    color: "#fdfdff",
     textAlign: "center",
-    textShadowColor: '#00171f',
-    textShadowOffset: {width: 1, height: 0},
+    textShadowColor: '#012a4a',
+    textShadowOffset: {width: 1, height: -2},
     textShadowRadius: 20
   },
   header: {
@@ -110,12 +93,14 @@ const styles = StyleSheet.create({
     height: '12%',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#1982c4'
   },
   name: {
     fontSize: 25,
-    color: "#fbff12",
+    fontFamily: 'OleoScript-Regular',
+    color: "#fdfdff",
     textAlign: "center",
-    textShadowColor: '#fbff12',
+    textShadowColor: '#edede9',
     textShadowOffset: {width: 1, height: 0},
     textShadowRadius: 20
   },
@@ -131,7 +116,6 @@ const styles = StyleSheet.create({
     width: '50%',
     height: '50%',
     padding: 5,
-
   },
   imageSetting: {
     resizeMode: "cover",
@@ -143,66 +127,15 @@ const styles = StyleSheet.create({
   boxheader: {
     textAlign: 'center',
     fontSize: 20,
-    color: "#00171f",
-    textShadowColor: '#00171f',
-    textShadowOffset: {width: 4, height: 0},
+    fontFamily: 'TitanOne-Regualar',
+    color: "#fdfdff",
+    textShadowColor: '#012a4a',
+    textShadowOffset: {width: 1, height: -2},
     textShadowRadius: 20
   },
   inner: {
     flex: 1, 
     alignItems: 'center',
   }
-  
-  // click: {
-  //   backgroundColor: "white",
-  //   width: 150,
-  //   height: 150,
-  //   margin: 1,
-  //   color: "black",
-  //   lineHeight: 25,
-  //   textAlign: "center",
-  //   fontSize: 15,
-  //   borderRadius: 100 / 2,
-  //   backgroundColor: "coral",
-  // }
-  
-
-
-
-
-/* old styling */
-
-  // body: {
-  //   backgroundColor: "beige",
-  //   flex: 1,
-  //   borderColor: "black",
-  // },
-  // headerText: {
-  //   color: "black",
-  //   fontSize: 45,
-  //   alignSelf: "center",
-  //   borderWidth: 4,
-  //   borderColor: "lightslategrey",
-  //   borderRadius: 100 / 2,
-  //   backgroundColor: "lightslategrey",
-  // },
-  // tapWrapper: {
-  //   flex: 1,
-  //   padding: 120,
-  //   flexDirection: "row",
-  //   flexWrap: "wrap",
-  // },
-  // tap: {
-  //   backgroundColor: "white",
-  //   width: 150,
-  //   height: 150,
-  //   margin: 1,
-  //   color: "black",
-  //   lineHeight: 25,
-  //   textAlign: "center",
-  //   fontSize: 15,
-  //   borderRadius: 100 / 2,
-  //   backgroundColor: "coral",
-  // },
 });
 export default HomepageScreen;
