@@ -7,13 +7,16 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import CustomButton from "../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import GestureRecognizer, {
   swipeDirections,
 } from "react-native-swipe-gestures";
 import Carousel from "react-native-snap-carousel";
+import { Card, Paragraph, Title } from "react-native-paper";
+import { WebView } from "react-native-webview";
+import { isValidTimestamp } from "@firebase/util";
 
 const GetActiveScreen = ({ route }) => {
   const { exercisesArray } = route.params;
@@ -26,31 +29,34 @@ const GetActiveScreen = ({ route }) => {
     navigation.navigate("Homepage");
   };
 
-  const changeIndex = (num) => {
-    setCurrentIndex((currIndex) => currIndex + num);
-  };
+  const onVideoReady = (e) => e.target.pauseVideo();
 
   const renderItem = ({ item, index }) => {
     return (
-      <View>
-        <Text>{item.name}</Text>
-        <View style={styles.flexWrap}>
-          <Image
-            style={{ ...styles.flexItems, width: 250, height: 250 }}
-            source={{ uri: item.picture }}
-          ></Image>
-        </View>
-        <Text>{item.description}</Text>
-        <Text>-----------------------</Text>
-        <Text>Step One: {item.stepOne}</Text>
-        <Text>Step Two: {item.stepTwo}</Text>
-        <Text>Step Three: {item.stepThree}</Text>
-        <CustomButton
-          text="Watch Exercise Video"
-          onPress={() => Linking.openURL(item.howToLink)}
-          bgColor="#E7EAF4"
-          fgColor="#4765A9"
-        ></CustomButton>
+      <View style={{ height: 500 }}>
+        <Card style={{ flex: 1, flexDirection: "column" }} elevation={5}>
+          <Card.Content>
+            <Title style={{ textAlign: "center" }}>{item.name}</Title>
+          </Card.Content>
+          <View
+            style={{
+              height: 300,
+              margin: 10,
+              borderColor: "black",
+            }}
+          >
+            <WebView
+              source={{ uri: item.howToLink }}
+              style={styles.video}
+              scalesPageToFit={true}
+            />
+          </View>
+          <Card.Content>
+            <Paragraph style={{ textAlign: "center", paddingTop: 17 }}>
+              {item.description}
+            </Paragraph>
+          </Card.Content>
+        </Card>
       </View>
     );
   };
@@ -104,6 +110,11 @@ const styles = StyleSheet.create({
   flexItems: {
     paddingHorizontal: 10,
     marginHorizontal: 5,
+  },
+  video: {
+    height: 0,
+    marginBottom: 0,
+    paddingBottom: 0,
   },
 });
 
