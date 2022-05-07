@@ -1,111 +1,118 @@
-import { View, Text, StyleSheet, ScrollView, Linking } from "react-native";
-import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Linking,
+  SafeAreaView,
+} from "react-native";
+import React, { useState, useEffect, useRef } from "react";
 import { Avatar, Card, Paragraph, Title } from "react-native-paper";
 import CustomButton from "../components/CustomButton";
 import GestureRecognizer from "react-native-swipe-gestures";
+import Carousel from "react-native-snap-carousel";
+import { useNavigation } from "@react-navigation/native";
 
 const HobbySwipeScreen = ({ route }) => {
   const { hobbiesArr } = route.params;
   const [currIndex, SetCurrIndex] = useState(0);
-  const [card, setCard] = useState({});
+  const [hobbies, setHobbies] = useState(hobbiesArr);
+  const carousel = useRef(null);
   const [isViewingDetails, setIsViewingDetails] = useState(false);
+  const navigation = useNavigation();
 
-  useEffect(() => {
-    console.log(currIndex);
-    setCard({
-      header: hobbiesArr[currIndex].name,
-      picture: hobbiesArr[currIndex].firstPicture,
-      description: null,
-      learnMoreLink: null,
-    });
-  }, [currIndex]);
+  const renderItem = (item, index) => {
+    if (!isViewingDetails || item.index !== currIndex) {
+      return (
+        <Card onPress={showCardDetails}>
+          <Card.Content>
+            <Title>{item.item.name}</Title>
+          </Card.Content>
+          <Card.Cover
+            source={{ uri: item.item.firstPicture }}
+            style={{ width: 300, height: 300 }}
+          />
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          ></View>
+        </Card>
+      );
+    } else {
+      return (
+        <Card onPress={showCardDetails}>
+          <Card.Content>
+            <Title>{`Get started on your ${hobbiesArr[currIndex].name} adventure!`}</Title>
+          </Card.Content>
+          <Card.Cover
+            source={{ uri: item.item.secondPicture }}
+            style={{ width: 300, height: 300 }}
+          />
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          ></View>
+          <Card.Content>
+            <Paragraph
+              style={{
+                maxWidth: 250,
+                alignSelf: "center",
+                textAlign: "center",
+              }}
+            >
+              {item.item.description}
+            </Paragraph>
+          </Card.Content>
+          <CustomButton
+            text="Learn More"
+            onPress={() => {
+              Linking.openURL(item.item.learnMoreLink);
+            }}
+          ></CustomButton>
+        </Card>
+      );
+    }
+  };
 
   const showCardDetails = () => {
-    if (!isViewingDetails) {
-      console.log("Adding link", hobbiesArr[currIndex]);
-      setCard({
-        header: `Get started on your ${hobbiesArr[currIndex].name} adventure!`,
-        picture: hobbiesArr[currIndex].secondPicture,
-        description: hobbiesArr[currIndex].description,
-        learnMoreLink: hobbiesArr[currIndex].learnMoreLink,
-      });
-    } else {
-      setCard({
-        header: hobbiesArr[currIndex].name,
-        picture: hobbiesArr[currIndex].firstPicture,
-        description: null,
-        learnMoreLink: null,
-      });
-    }
     setIsViewingDetails(!isViewingDetails);
   };
 
-  const changeIndex = (num) => {
-    let result = currIndex + num;
-    if (result > 0 && result < hobbiesArr.length) {
-      SetCurrIndex(result);
-    }
+  const onBackButtonPress = () => {
+    navigation.navigate("Homepage");
   };
 
   return (
-    <GestureRecognizer
-      onSwipeRight={() => changeIndex(-1)}
-      onSwipeLeft={() => changeIndex(1)}
-    >
-      <ScrollView>
-        <View style={styles.root}>
-          <Text>Swipe for a new hobby!</Text>
-          <Card onPress={showCardDetails}>
-            <Card.Content>
-              <Title>{card.header}</Title>
-            </Card.Content>
-            <Card.Cover
-              source={{ uri: card.picture }}
-              style={{ width: 300, height: 300 }}
-            />
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <Avatar.Text
-                size={30}
-                label="L"
-                theme={{ colors: { primary: "green" } }}
-              />
-              <Avatar.Text
-                size={30}
-                label="R"
-                theme={{ colors: { primary: "red" } }}
-              />
-            </View>
-            <Card.Content>
-              {card.description ? (
-                <Paragraph
-                  style={{
-                    maxWidth: 250,
-                    alignSelf: "center",
-                    textAlign: "center",
-                  }}
-                >
-                  {card.description}
-                </Paragraph>
-              ) : null}
-            </Card.Content>
-            {card.learnMoreLink ? (
-              <CustomButton
-                text="Learn More"
-                onPress={() => {
-                  Linking.openURL(card.learnMoreLink);
-                }}
-              ></CustomButton>
-            ) : null}
-          </Card>
-        </View>
-      </ScrollView>
-    </GestureRecognizer>
+    <SafeAreaView style={{ flex: 1, paddingTop: "30%" }}>
+      <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
+        <Carousel
+          lockScrollWhileSnapping={true}
+          swipeThreshold={10}
+          layout={"default"}
+          ref={carousel}
+          data={hobbies}
+          sliderWidth={380}
+          itemWidth={300}
+          renderItem={renderItem}
+          onSnapToItem={(index) => {
+            SetCurrIndex(index);
+            setIsViewingDetails(false);
+          }}
+        />
+      </View>
+      <CustomButton
+        text="Back"
+        bgColor="#E7EAF4"
+        fgColor="#4765A9"
+        onPress={onBackButtonPress}
+      />
+    </SafeAreaView>
   );
 };
 
