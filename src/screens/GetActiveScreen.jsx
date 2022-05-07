@@ -14,7 +14,7 @@ import GestureRecognizer, {
   swipeDirections,
 } from "react-native-swipe-gestures";
 import Carousel from "react-native-snap-carousel";
-import { Card, Paragraph, Title } from "react-native-paper";
+import { Button, Card, Paragraph, Title } from "react-native-paper";
 import { WebView } from "react-native-webview";
 import { isValidTimestamp } from "@firebase/util";
 
@@ -62,7 +62,14 @@ const GetActiveScreen = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: "30%" }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        paddingTop: "30%",
+        paddingBottom: "25%",
+        justifyContent: "center",
+      }}
+    >
       <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
         <Carousel
           lockScrollWhileSnapping={true}
@@ -76,12 +83,13 @@ const GetActiveScreen = ({ route }) => {
           onSnapToItem={(index) => setCurrentIndex(index)}
         />
       </View>
-      <CustomButton
-        text="Finish Exercising"
+      <Button
+        mode="contained"
         onPress={onFinishExercisePress}
-        bgColor="#E7EAF4"
-        fgColor="#4765A9"
-      ></CustomButton>
+        style={styles.button}
+      >
+        Finish Exercising
+      </Button>
     </SafeAreaView>
   );
 };
@@ -97,9 +105,10 @@ const styles = StyleSheet.create({
     borderColor: "rgba(0,0,0,0.2)",
     alignItems: "center",
     justifyContent: "center",
-    width: 40,
-    height: 70,
-    borderRadius: 50,
+    width: "50%",
+    height: "10%",
+    borderRadius: 10,
+    marginLeft: "25%",
   },
   flexWrap: {
     display: "flex",

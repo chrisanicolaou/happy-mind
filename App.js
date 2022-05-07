@@ -18,10 +18,23 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   const [user, setUser] = useState("");
+  const theme = {
+    ...DefaultTheme,
+    roundness: 2,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: "#3498db",
+      accent: "#f1c40f",
+    },
+    animation: {
+      scale: 1.0,
+    },
+  };
+
   return (
     <NavigationContainer>
       <UserContext.Provider value={{ user, setUser }}>
-        <PaperProvider theme={{ ...DefaultTheme }}>
+        <PaperProvider theme={theme}>
           <SafeAreaView style={styles.root}>
             <Stack.Navigator
               initialRouteName="Login"
