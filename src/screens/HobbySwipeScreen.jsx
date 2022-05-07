@@ -12,6 +12,7 @@ import CustomButton from "../components/CustomButton";
 import GestureRecognizer from "react-native-swipe-gestures";
 import Carousel from "react-native-snap-carousel";
 import { useNavigation } from "@react-navigation/native";
+import { Button } from "react-native-paper";
 
 const HobbySwipeScreen = ({ route }) => {
   const { hobbiesArr } = route.params;
@@ -24,13 +25,13 @@ const HobbySwipeScreen = ({ route }) => {
   const renderItem = (item, index) => {
     if (!isViewingDetails || item.index !== currIndex) {
       return (
-        <Card onPress={showCardDetails}>
+        <Card onPress={showCardDetails} style={styles.card} elevation={5}>
           <Card.Content>
-            <Title>{item.item.name}</Title>
+            <Title style={{ textAlign: "center" }}>{item.item.name}</Title>
           </Card.Content>
           <Card.Cover
             source={{ uri: item.item.firstPicture }}
-            style={{ width: 300, height: 300 }}
+            style={styles.cardImage}
           />
           <View
             style={{
@@ -43,13 +44,15 @@ const HobbySwipeScreen = ({ route }) => {
       );
     } else {
       return (
-        <Card onPress={showCardDetails}>
+        <Card onPress={showCardDetails} style={styles.card} elevation={5}>
           <Card.Content>
-            <Title>{`Get started on your ${hobbiesArr[currIndex].name} adventure!`}</Title>
+            <Title
+              style={{ textAlign: "center" }}
+            >{`Get started on your ${hobbiesArr[currIndex].name} adventure!`}</Title>
           </Card.Content>
           <Card.Cover
             source={{ uri: item.item.secondPicture }}
-            style={{ width: 300, height: 300 }}
+            style={styles.cardImage}
           />
           <View
             style={{
@@ -64,17 +67,21 @@ const HobbySwipeScreen = ({ route }) => {
                 maxWidth: 250,
                 alignSelf: "center",
                 textAlign: "center",
+                paddingTop: "5%",
               }}
             >
               {item.item.description}
             </Paragraph>
           </Card.Content>
-          <CustomButton
-            text="Learn More"
+          <Button
+            mode="contained"
             onPress={() => {
               Linking.openURL(item.item.learnMoreLink);
             }}
-          ></CustomButton>
+            style={styles.learnMoreButton}
+          >
+            Learn More
+          </Button>
         </Card>
       );
     }
@@ -85,7 +92,7 @@ const HobbySwipeScreen = ({ route }) => {
   };
 
   const onBackButtonPress = () => {
-    navigation.navigate("Homepage");
+    navigation.navigate("PickInterests");
   };
 
   return (
@@ -106,12 +113,13 @@ const HobbySwipeScreen = ({ route }) => {
           }}
         />
       </View>
-      <CustomButton
-        text="Back"
-        bgColor="#E7EAF4"
-        fgColor="#4765A9"
+      <Button
+        mode="contained"
         onPress={onBackButtonPress}
-      />
+        style={styles.backButton}
+      >
+        Back
+      </Button>
     </SafeAreaView>
   );
 };
@@ -121,6 +129,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 60,
     paddingHorizontal: 10,
+  },
+  card: {
+    paddingBottom: 10,
+  },
+  cardImage: {
+    width: 280,
+    height: 300,
+    alignSelf: "center",
+    borderWidth: 2,
+    borderColor: "grey",
+    borderRadius: 10,
+  },
+  learnMoreButton: {
+    width: "75%",
+    margin: "3%",
+    alignSelf: "center",
+    borderRadius: 10,
+  },
+  backButton: {
+    width: "50%",
+    margin: "3%",
+    alignSelf: "center",
+    borderRadius: 10,
+    marginBottom: "20%",
   },
 });
 
