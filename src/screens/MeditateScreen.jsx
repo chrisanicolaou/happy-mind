@@ -144,15 +144,15 @@ const MeditateScreen = () => {
               // }),
               width: circleWidth,
               height: circleWidth,
-              alignItems: circleWidth,
-              justifyContent: circleWidth,
-              alignSelf: circleWidth,
+              // alignItems: circleWidth,
+              // justifyContent: circleWidth,
+              // alignSelf: circleWidth,
               //margin: "center",
 
               borderRadius: circleWidth / 2,
               ...StyleSheet.absoluteFillObject,
               transform: [
-                { translateX: translation },
+                { translateX: 0 },
 
                 {
                   rotate: rotation,
@@ -172,7 +172,7 @@ const MeditateScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "afff",
+    backgroundColor: "#afff",
     alignItems: "center",
     justifyContent: "center",
     left: width / 4,
