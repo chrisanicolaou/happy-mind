@@ -205,11 +205,10 @@ const MeditateScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     left: width / 4,
-    top: width / 4,
+    top: width / 1.2,
   },
 });
 
