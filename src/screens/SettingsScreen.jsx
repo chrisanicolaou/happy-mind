@@ -12,7 +12,12 @@ import {
   HelperText,
   TextInput,
 } from "react-native-paper";
-import { setDisplayName } from "../utils/api";
+import {
+  logUserOut,
+  setDisplayName,
+  setEmail,
+  setPassword,
+} from "../utils/api";
 import { UserContext } from "../utils/UserContext";
 import { useNavigation } from "@react-navigation/native";
 
@@ -25,14 +30,14 @@ const SettingsScreen = () => {
     visible: false,
     message: "",
   });
-  const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [passwordStatus, setPasswordStatus] = useState({
     type: "error" || "info",
     visible: false,
     message: "",
   });
-  const [email, setNewEmail] = useState("");
+  const [newEmail, setNewEmail] = useState("");
   const [emailStatus, setEmailStatus] = useState({
     type: "error" || "info",
     visible: false,
@@ -67,21 +72,68 @@ const SettingsScreen = () => {
       });
     }
   };
-  const onUpdatePasswordPress = () => {
-    if (!newPassword) {
+  const onUpdatePasswordPress = async () => {
+    try {
+      if (!confirmNewPassword) {
+        setPasswordStatus({
+          type: "error",
+          visible: true,
+          message: "Password cannot be less than 6 characters!",
+        });
+        return;
+      }
+      if (newPassword !== confirmNewPassword) {
+        setPasswordStatus({
+          type: "error",
+          visible: true,
+          message: "Passwords do not match!",
+        });
+        return;
+      }
+      await setPassword(user, confirmNewPassword);
+      setPasswordStatus({
+        type: "info",
+        visible: true,
+        message: "Success!",
+      });
+      setNewPassword("");
+      setConfirmNewPassword("");
+    } catch (err) {
       setPasswordStatus({
         type: "error",
         visible: true,
-        message: "Password cannot be less than 6 characters!",
+        message: err.message,
       });
-      return;
     }
   };
-  const onUpdateEmailPress = () => {
-    console.warn("Change email name");
+  const onUpdateEmailPress = async () => {
+    try {
+      if (!newEmail) {
+        setEmailStatus({
+          type: "error",
+          visible: true,
+          message: "Email cannot be empty!",
+        });
+        return;
+      }
+      await setEmail(user, newEmail);
+      setEmailStatus({
+        type: "info",
+        visible: true,
+        message: "Success!",
+      });
+      setNewEmail("");
+    } catch (err) {
+      setEmailStatus({
+        type: "error",
+        visible: true,
+        message: err.message,
+      });
+    }
   };
-  const onLogoutPress = () => {
-    console.warn("logut");
+  const onLogoutPress = async () => {
+    await logUserOut();
+    navigation.navigate("Login");
   };
 
   return (
@@ -110,16 +162,18 @@ const SettingsScreen = () => {
         </View>
         <View style={styles.input}>
           <TextInput
-            label="Old Password"
-            value={newDisplayName}
-            onChangeText={(text) => setNewDisplayName(text)}
+            label="New Password"
+            value={newPassword}
+            onChangeText={(text) => setNewPassword(text)}
             style={styles.textInput}
+            secureTextEntry={true}
           />
           <TextInput
-            label="New Password"
-            value={newDisplayName}
-            onChangeText={(text) => setNewDisplayName(text)}
+            label="Confirm New Password"
+            value={confirmNewPassword}
+            onChangeText={(text) => setConfirmNewPassword(text)}
             style={styles.textInput}
+            secureTextEntry={true}
           />
           <HelperText
             type={passwordStatus.type}
@@ -141,8 +195,8 @@ const SettingsScreen = () => {
         >
           <TextInput
             label="Email"
-            value={newDisplayName}
-            onChangeText={(text) => setNewDisplayName(text)}
+            value={newEmail}
+            onChangeText={(text) => setNewEmail(text)}
             style={styles.textInput}
           />
           <HelperText type={emailStatus.type} visible={emailStatus.visible}>

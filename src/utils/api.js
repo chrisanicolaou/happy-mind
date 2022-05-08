@@ -5,6 +5,9 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   updateProfile,
+  updatePassword,
+  updateEmail,
+  signOut,
 } from "firebase/auth";
 
 export const loginUser = async (email, password) => {
@@ -103,8 +106,37 @@ export const setDisplayName = async (user, displayName) => {
       throw new Error("This is already your display name!");
     }
     await updateProfile(user, { displayName: displayName });
-    return auth.currentUser;
   } catch (err) {
-    throw new Error(err.message);
+    console.log(err.code);
+  }
+};
+
+export const setPassword = async (user, password) => {
+  try {
+    await updatePassword(user, password);
+  } catch (err) {
+    switch (err.code) {
+      case "auth/weak-password":
+        throw new Error("Password must be at least 6 characters!");
+    }
+  }
+};
+
+export const setEmail = async (user, email) => {
+  try {
+    await updateEmail(user, email);
+  } catch (err) {
+    switch (err.code) {
+      case "auth/invalid-email":
+        throw new Error("Invalid email!");
+    }
+  }
+};
+
+export const logUserOut = async () => {
+  try {
+    await signOut(auth);
+  } catch (err) {
+    console.log(err);
   }
 };
