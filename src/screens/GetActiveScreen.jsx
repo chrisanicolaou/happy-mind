@@ -65,12 +65,18 @@ const GetActiveScreen = ({ route }) => {
     <SafeAreaView
       style={{
         flex: 1,
-        paddingTop: "30%",
-        paddingBottom: "25%",
         justifyContent: "center",
       }}
     >
-      <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "center",
+          paddingTop: "10%",
+          paddingBottom: "10%",
+        }}
+      >
         <Carousel
           lockScrollWhileSnapping={true}
           swipeThreshold={10}
@@ -82,14 +88,14 @@ const GetActiveScreen = ({ route }) => {
           renderItem={renderItem}
           onSnapToItem={(index) => setCurrentIndex(index)}
         />
+        <Button
+          mode="contained"
+          onPress={onFinishExercisePress}
+          style={styles.button}
+        >
+          Finish Exercising
+        </Button>
       </View>
-      <Button
-        mode="contained"
-        onPress={onFinishExercisePress}
-        style={styles.button}
-      >
-        Finish Exercising
-      </Button>
     </SafeAreaView>
   );
 };
