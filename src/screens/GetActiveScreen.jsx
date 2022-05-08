@@ -73,8 +73,8 @@ const GetActiveScreen = ({ route }) => {
           flex: 1,
           flexDirection: "column",
           justifyContent: "center",
-          paddingTop: "10%",
-          paddingBottom: "10%",
+          paddingTop: "7%",
+          paddingBottom: "3%",
         }}
       >
         <Carousel
@@ -103,7 +103,7 @@ const GetActiveScreen = ({ route }) => {
 const styles = StyleSheet.create({
   root: {
     alignItems: "center",
-    paddingVertical: 60,
+    paddingTop: 30,
     paddingHorizontal: 10,
   },
   button: {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "50%",
-    height: "10%",
+    height: "8%",
     borderRadius: 10,
     marginLeft: "25%",
   },

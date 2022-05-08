@@ -96,8 +96,15 @@ const HobbySwipeScreen = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: "30%" }}>
-      <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          justifyContent: "center",
+          paddingTop: "3%",
+        }}
+      >
         <Carousel
           lockScrollWhileSnapping={true}
           swipeThreshold={10}
@@ -149,10 +156,9 @@ const styles = StyleSheet.create({
   },
   backButton: {
     width: "50%",
-    margin: "3%",
     alignSelf: "center",
     borderRadius: 10,
-    marginBottom: "20%",
+    marginBottom: "3%",
   },
 });
 
