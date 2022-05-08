@@ -47,7 +47,6 @@ const SignUpScreen = () => {
 
       const user = await signUpUser(username, email, password);
       setUser(user);
-      navigation.navigate("Homepage");
     } catch (err) {
       setError(err.message);
     }

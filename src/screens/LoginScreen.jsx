@@ -44,7 +44,6 @@ const LoginScreen = () => {
       setUser(user);
       setEmail("");
       setPassword("");
-      navigation.navigate("Homepage");
     } catch (err) {
       setEmailOrPassError(err.message);
     }

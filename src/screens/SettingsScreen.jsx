@@ -19,11 +19,9 @@ import {
   setPassword,
 } from "../utils/api";
 import { UserContext } from "../utils/UserContext";
-import { useNavigation } from "@react-navigation/native";
 
 const SettingsScreen = () => {
   const { user, setUser } = useContext(UserContext);
-  const navigation = useNavigation();
   const [newDisplayName, setNewDisplayName] = useState("");
   const [displayNameStatus, setDisplayNameStatus] = useState({
     type: "error" || "info",
@@ -133,7 +131,7 @@ const SettingsScreen = () => {
   };
   const onLogoutPress = async () => {
     await logUserOut();
-    navigation.navigate("Login");
+    setUser("");
   };
 
   return (
@@ -218,13 +216,6 @@ const SettingsScreen = () => {
             onPress={onLogoutPress}
           >
             Logout
-          </Button>
-          <Button
-            mode="contained"
-            style={styles.logoutButton}
-            onPress={() => navigation.navigate("Homepage")}
-          >
-            Back
           </Button>
         </View>
       </View>

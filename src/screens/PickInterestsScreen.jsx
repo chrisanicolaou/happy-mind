@@ -112,14 +112,6 @@ const PickInterestsScreen = () => {
           <MenuItem text={"DIY"} itemImage={require("../../images/DIY.png")} />
         </TouchableOpacity>
       </View>
-      <Button
-        mode="contained"
-        onPress={() => {
-          navigation.navigate("Homepage");
-        }}
-      >
-        Back
-      </Button>
     </SafeAreaView>
   );
 };
