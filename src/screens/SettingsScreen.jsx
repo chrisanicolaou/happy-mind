@@ -6,13 +6,31 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import { Button, DefaultTheme, TextInput } from "react-native-paper";
+import {
+  Button,
+  DefaultTheme,
+  HelperText,
+  TextInput,
+} from "react-native-paper";
 
 const SettingsScreen = () => {
   const [newDisplayName, setNewDisplayName] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [email, setNewEmail] = useState("");
+
+  const onChangeDisplayNamePress = () => {
+    console.warn("Change display name");
+  };
+  const onUpdatePasswordPress = () => {
+    console.warn("Change password name");
+  };
+  const onUpdateEmailPress = () => {
+    console.warn("Change email name");
+  };
+  const onLogoutPress = () => {
+    console.warn("logut");
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -24,7 +42,16 @@ const SettingsScreen = () => {
             onChangeText={(text) => setNewDisplayName(text)}
             style={styles.textInput}
           />
-          <Button mode="contained">Change Display Name</Button>
+          <HelperText type="error" visible={true}>
+            lorem ipsum other words fjkdshjkfdsfsd
+          </HelperText>
+          <Button
+            mode="contained"
+            style={styles.button}
+            onPress={onChangeDisplayNamePress}
+          >
+            Change Display Name
+          </Button>
         </View>
         <View style={styles.input}>
           <TextInput
@@ -39,7 +66,16 @@ const SettingsScreen = () => {
             onChangeText={(text) => setNewDisplayName(text)}
             style={styles.textInput}
           />
-          <Button mode="contained">Change Display Name</Button>
+          <HelperText type="error" visible={true}>
+            lorem ipsum other words fjkdshjkfdsfsd
+          </HelperText>
+          <Button
+            mode="contained"
+            style={styles.button}
+            onPress={onUpdatePasswordPress}
+          >
+            Update Password
+          </Button>
         </View>
         <KeyboardAvoidingView
           style={{ ...styles.input, marginBottom: "5%" }}
@@ -51,10 +87,24 @@ const SettingsScreen = () => {
             onChangeText={(text) => setNewDisplayName(text)}
             style={styles.textInput}
           />
-          <Button mode="contained">Change Display Name</Button>
+          <HelperText type="error" visible={true}>
+            Sample
+          </HelperText>
+          <Button
+            mode="contained"
+            style={styles.button}
+            onPress={onUpdateEmailPress}
+          >
+            Update Email
+          </Button>
         </KeyboardAvoidingView>
         <View style={styles.input}>
-          <Button mode="contained" color="red">
+          <Button
+            mode="contained"
+            color="red"
+            style={styles.logoutButton}
+            onPress={onLogoutPress}
+          >
             Logout
           </Button>
         </View>
@@ -78,5 +128,13 @@ const styles = StyleSheet.create({
   },
   textInput: {
     marginBottom: 10,
+  },
+  button: {
+    width: "75%",
+    alignSelf: "center",
+  },
+  logoutButton: {
+    width: "50%",
+    alignSelf: "center",
   },
 });
