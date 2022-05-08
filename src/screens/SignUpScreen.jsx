@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
@@ -145,6 +145,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 60,
     backgroundColor: "rgba(100, 20, 200, 0.4)",
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
   },
   logo: {
     width: "90%",
@@ -158,7 +160,7 @@ const styles = StyleSheet.create({
     margin: 4,
   },
   text: {
-    color: "gray",
+    color: "grey",
     marginVertical: 30,
   },
   link: {
