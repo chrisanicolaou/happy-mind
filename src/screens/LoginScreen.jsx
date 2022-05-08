@@ -6,6 +6,7 @@ import {
   StyleSheet,
   useWindowDimensions,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import Logo from "../../images/Logo.jpeg";
 import CustomInput from "../components/CustomInput";
@@ -124,9 +125,10 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   root: {
     alignItems: "center",
-    padding: 50,
+    padding: 40,
     backgroundColor: "rgba(100, 20, 200, 0.4)",
-    marginVertical: -40,
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
   },
   logo: {
     width: "90%",
