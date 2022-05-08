@@ -1,4 +1,11 @@
-import { StyleSheet, View, Text, Dimensions, Animated } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  Animated,
+  Image,
+} from "react-native";
 import React, { useRef, useEffect } from "react";
 
 const { width, height } = Dimensions.get("window");
@@ -131,6 +138,13 @@ const MeditateScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}> Breathe! </Text>
+
+      <Image
+        source={require("../../images/Breathe.png")}
+        style={styles.image}
+      />
+
       <Animated.View
         style={{
           width: circleWidth,
@@ -153,10 +167,10 @@ const MeditateScreen = () => {
           opacity: exhale,
         }}
       >
-        <Text style={{ fontSize: 20, fontWeight: "600" }}> Exhale </Text>
+        <Text style={{ fontSize: 30, fontWeight: "700" }}> Exhale </Text>
       </Animated.View>
 
-      {[0, 1, 2, 3, 4, 5, 6, 7].map((item) => {
+      {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((item) => {
         const rotation = translation.interpolate({
           inputRange: [0, 100],
           outputRange: [`${item * 45}deg`, `${item * 45 + 360}deg`],
@@ -166,10 +180,10 @@ const MeditateScreen = () => {
             key={item}
             style={{
               backgroundColor: "purple",
-              // backgroundColor: translation.interpolate({
-              //   inputRange: [0, 100],
-              //   outputRange: ["orange", "blue"],
-              // }),
+              //  backgroundColor: translation.interpolate({
+              //    inputRange: [0, 100],
+              //    outputRange: ["orange", "blue"],
+              //  }),
               opacity: 0.1,
               // opacity: translation.interpolate({
               //   inputRange: [0, 50, 100],
@@ -205,11 +219,23 @@ const MeditateScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     left: width / 4,
-    top: width / 4,
+    top: width / 1.2,
+  },
+  header: {
+    alignSelf: "center",
+
+    fontSize: "50",
+    fontWeight: "100",
+  },
+  image: {
+    width: 300,
+    height: 325,
+    justify: "center",
+    resizeMode: "center",
+    alignSelf: "absolute",
   },
 });
 
