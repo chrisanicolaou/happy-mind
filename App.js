@@ -3,16 +3,29 @@ import { SafeAreaView, StyleSheet, Text } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "./src/screens/LoginScreen";
-import HomepageScreen from "./src/screens/HomepageScreen";
-import SignUpScreen from "./src/screens/SignUpScreen";
-import PickInterestsScreen from "./src/screens/PickInterestsScreen";
-import HobbySwipeScreen from "./src/screens/HobbySwipeScreen";
-import GetActiveScreen from "./src/screens/GetActiveScreen";
-import MeditateScreen from "./src/screens/MeditateScreen";
+// import LoginScreen from "./src/screens/LoginScreen";
+// import HomepageScreen from "./src/screens/HomepageScreen";
+// import SignUpScreen from "./src/screens/SignUpScreen";
+// import PickInterestsScreen from "./src/screens/PickInterestsScreen";
+// import HobbySwipeScreen from "./src/screens/HobbySwipeScreen";
+// import GetActiveScreen from "./src/screens/GetActiveScreen";
+// import MeditateScreen from "./src/screens/MeditateScreen";
 import { UserContext } from "./src/utils/UserContext";
-import ForgotPasswordScreen from "./src/screens/ForgotPasswordScreen";
-import FitnessOptionsScreen from "./src/screens/FitnessOptionsScreen";
+// import ForgotPasswordScreen from "./src/screens/ForgotPasswordScreen";
+// import FitnessOptionsScreen from "./src/screens/FitnessOptionsScreen";
+// import SettingsScreen from "./src/screens/SettingsScreen";
+import {
+  ForgotPasswordScreen,
+  FitnessOptionsScreen,
+  SettingsScreen,
+  LoginScreen,
+  HomepageScreen,
+  SignUpScreen,
+  PickInterestsScreen,
+  HobbySwipeScreen,
+  GetActiveScreen,
+  MeditateScreen,
+} from "./src/screens/index";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,7 +50,7 @@ const App = () => {
         <PaperProvider theme={theme}>
           <SafeAreaView style={styles.root}>
             <Stack.Navigator
-              initialRouteName="Login"
+              initialRouteName="Settings"
               screenOptions={{ headerShown: false }}
             >
               <Stack.Screen name="Login" component={LoginScreen} />
@@ -58,6 +71,7 @@ const App = () => {
                 name="FitnessOptions"
                 component={FitnessOptionsScreen}
               />
+              <Stack.Screen name="Settings" component={SettingsScreen} />
             </Stack.Navigator>
           </SafeAreaView>
         </PaperProvider>
