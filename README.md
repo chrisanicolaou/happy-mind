@@ -2,17 +2,15 @@
 
 ![platforms](https://img.shields.io/badge/platforms-iOS%20%2F%20android-brightgreen)
 ![repo size](https://img.shields.io/github/repo-size/chrisanicolaou/happy-mind)
-![followers](https://img.shields.io/github/followers/chrisanicolaou?style=social)
-
 ![language](https://img.shields.io/github/languages/top/chrisanicolaou/happy-mind)
 ![PRs](https://img.shields.io/github/issues-pr-closed/chrisanicolaou/happy-mind)
-![lines](https://img.shields.io/tokei/lines/github/chrisanicolaou/happy-mind)
+![followers](https://img.shields.io/github/followers/chrisanicolaou?style=social)
 
 ---
 
 ---
 
-## A mobile app that helps you to take the first steps to improving your mental wellbeing!
+## A mobile app that helps you take the first steps to improving your mental wellbeing
 
 ---
 
@@ -34,7 +32,7 @@
 
 ## Overview
 
-The purpose of Happy Mind is to gently encourage the user into behaviours that will have a positive impact on their mental wellbeing. We used [advice from the NHS](https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/five-steps-to-mental-wellbeing/) to structure our app, which is broken down into 3 main sections: [Interests / Hobbies](#interests), [Get Active](#active), and [Meditation](#meditation). We wanted the app to be largely minimalistic and unobtrusive - giving the user freedom to explore the app, without being harrassed by excessive pop-ups, push notifications, or other prompts.
+The purpose of Happy Mind is to gently encourage the user into behaviours that will have a positive impact on their mental wellbeing. We used [advice from the NHS](https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/five-steps-to-mental-wellbeing/) to conceptualise our app, which is broken down into 3 main sections: [Interests / Hobbies](#interests), [Get Active](#active), and [Meditation](#meditation). We wanted the app to be largely minimalistic and unobtrusive - giving the user freedom to explore the app, without being harrassed by excessive pop-ups, push notifications, or other prompts.
 
 ---
 
@@ -98,3 +96,59 @@ While not explicitly new tech, we wanted to draw special mention to the followin
 ---
 
 ## Our Limitations
+
+From concept to delivery, we only had 6 full days to work on our app. This extremely limiting timeframe forced us to think critically about what we wanted our minimum viable product to be. Since it was important to us that the user would have access to several different core sections of the app, by the time we finished, we were left with a pretty bare app. We originally wanted our app to feel a little more personal, and have a little more depth than what it is now - ultimately just retrieving data from our database.
+
+Below are some features we would have loved to have implemented, given more time.
+
+### **Test Coverage**:
+
+Since we were using Firebase as our backend, we had originally intended to have extensive testing for our frontend components, to ensure proper TDD and good coverage of the app. Unfortunately, Expo didn't play nice with Jest and we faced numerous errors when spiking and writing frontend tests. If we had enough time to resolve these before jumping in to the project, we would have loved to have extensive testing throughout our app.
+
+### **My Wellbeing**:
+
+In this section, the user would have been presented with a graph showing how they have been feeling each day over the course of their time on the app. The user can average by day, week, month - and can click different options to customise the graph shown. For instance, the user can see their Get Active history, and how their mood has been affected on days where they complete exercise.
+
+### **More personalised experience**:
+
+Since we already implemented storing information about the user on Firestore, we would have loved to present the user with additional inputs when signing up. This would allow us to create a unique fitness plan for them, as well as present them with unique hobbies based off of their interests when signing up, rather than sectioning the hobbies off into different interests each session.
+
+### **Cleaner UI & navigation**:
+
+Our initial MVP didn't properly consider navigating around the app. As such, during development, we ended up with lots of back buttons and a UI that doesn't look very "app like". With a little more time, we would have loved to remove the Homepage Screen and instead have a bottom appbar that allows the user to navigate through the app that way.
+
+In addition to this, the app needs some polishing - there are a few small visual bugs we would have liked to resolve, as well as including sound effects, music on meditation, and other vfx/sfx improvements.
+
+### **Settings**:
+
+A settings menu to allow the user to customise their [experience](#more-personalised-experience). This would also allow the user to logout - a much needed function that our app currently lacks!
+
+---
+
+---
+
+## Interests / Hobbies
+
+In this section, users are first taken to the "interests" screen, where they are presented with a series of interests - for example, "Sports".
+
+Once they select an interest, the app fetches and randomises an array of corresponding hobbies from Firestore. The user is then taken to the "Hobbies" screen, where they can then swipe left/right to view different hobbies related to their interest. Once they click on a hobby, they are shown additional details for how they can pursue this hobby, including a link to a site that will help them get started.
+
+---
+
+---
+
+## Get Active!
+
+In this section, users are first required to input both the type and intensity of their workout. Once done, the app fetches and randomises an array of corresponding exercises from Firestore.
+
+The user is then taken to their workout, where (similar to the Hobbies screen) they can swipe between different exercises. Each exercise includes a brief description, along with an embedded video example of the exercise.
+
+The app is designed to not "lock" the user into exercising, allowing them to finish whenever they want.
+
+---
+
+---
+
+## Meditation
+
+In this section, users are taken to a simple screen designed to relax them. They are guided through common breathing and mindfulness exercises to help them focus and destress.
