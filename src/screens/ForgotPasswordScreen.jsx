@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import React, { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
@@ -63,6 +63,9 @@ export default ForgotPasswordScreen;
 const styles = StyleSheet.create({
   root: {
     alignItems: "center",
-    padding: 60,
+    padding: 80,
+    backgroundColor: "rgba(100, 20, 200, 0.4)",
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
   },
 });
