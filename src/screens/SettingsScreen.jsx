@@ -235,10 +235,11 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingHorizontal: "10%",
-    marginVertical: "5%",
+    marginTop: "5%",
   },
   textInput: {
     marginBottom: 10,
+    height: 55,
   },
   button: {
     width: "75%",

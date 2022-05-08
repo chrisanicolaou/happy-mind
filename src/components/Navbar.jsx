@@ -13,10 +13,10 @@ import InterestsStackNavigator from "./InterestsStackNavigator";
 const Navbar = () => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    { key: "hobbies", title: "Hobbies", icon: "" },
-    { key: "fitness", title: "Fitness", icon: "" },
-    { key: "meditate", title: "Meditate", icon: "" },
-    { key: "settings", title: "Settings", icon: "" },
+    { key: "hobbies", title: "Hobbies", icon: "brush" },
+    { key: "fitness", title: "Fitness", icon: "bicycle" },
+    { key: "meditate", title: "Meditate", icon: "emoticon-happy-outline" },
+    { key: "settings", title: "Settings", icon: "cog-outline" },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
