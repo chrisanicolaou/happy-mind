@@ -45,8 +45,8 @@ const SignUpScreen = () => {
 
       //Refactored - see api.js for details
 
-      const userData = await signUpUser(username, email, password);
-      setUser(userData);
+      const user = await signUpUser(username, email, password);
+      setUser(user);
       navigation.navigate("Homepage");
     } catch (err) {
       setError(err.message);

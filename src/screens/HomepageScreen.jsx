@@ -31,7 +31,7 @@ const HomepageScreen = () => {
       <View style={styles.header}>
         {/* <Text style={styles.name}>{user.username} </Text> */}
         {/* <LoadFonts/> */}
-        <Text style={styles.title}> Welcome {user.username} </Text>
+        <Text style={styles.title}> Welcome {user.displayName} </Text>
       </View>
     );
   };
@@ -79,7 +79,10 @@ const HomepageScreen = () => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.box}>
+        <TouchableOpacity
+          style={styles.box}
+          onPress={() => navigation.navigate("Settings")}
+        >
           <Text style={styles.boxheader}> SETTINGS </Text>
           <View style={styles.inner}>
             <Image

@@ -39,8 +39,8 @@ const LoginScreen = () => {
         setEmailOrPassError("Please enter a password.");
         return;
       }
-      const userData = await loginUser(email, password);
-      setUser(userData);
+      const user = await loginUser(email, password);
+      setUser(user);
       navigation.navigate("Homepage");
     } catch (err) {
       setEmailOrPassError(err.message);

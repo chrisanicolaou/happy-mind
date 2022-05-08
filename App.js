@@ -50,7 +50,7 @@ const App = () => {
         <PaperProvider theme={theme}>
           <SafeAreaView style={styles.root}>
             <Stack.Navigator
-              initialRouteName="Settings"
+              initialRouteName="Login"
               screenOptions={{ headerShown: false }}
             >
               <Stack.Screen name="Login" component={LoginScreen} />
