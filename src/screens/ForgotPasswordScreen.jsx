@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Dimensions, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  SafeAreaView,
+  Image,
+} from "react-native";
 import React, { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
@@ -62,6 +69,11 @@ const ForgotPasswordScreen = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
         <View style={styles.root}>
+          <Image
+            source={require("../../assets/forgot-password.png")}
+            style={styles.logo}
+            resizeMode="contain"
+          />
           <HelperText
             type={message.type}
             visible={message.visible}
@@ -98,7 +110,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     height: Dimensions.get("window").height,
     width: Dimensions.get("window").width,
-    marginTop: "30%",
+    marginTop: "10%",
+  },
+  logo: {
+    height: 250,
+    width: 300,
+    alignSelf: "center",
   },
   textInput: {
     marginHorizontal: 20,
