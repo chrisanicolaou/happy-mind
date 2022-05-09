@@ -21,8 +21,14 @@ import { getDoc, doc } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 import { UserContext } from "../utils/UserContext";
 import { loginUser } from "../utils/api";
-import { Button, HelperText, TextInput } from "react-native-paper";
+import {
+  Button,
+  DefaultTheme,
+  HelperText,
+  TextInput,
+} from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import FadeIn from "react-native-fade-in-image";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState(""); //update from [username, setUsername]
@@ -100,7 +106,9 @@ const LoginScreen = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
         <View style={styles.root}>
-          <Image source={Logo} style={styles.logo} />
+          <FadeIn placeholderStyle={{ backgroundColor: "#f6f6f6" }}>
+            <Image source={Logo} style={styles.logo} />
+          </FadeIn>
           <HelperText
             type={emailOrPassError.type}
             visible={emailOrPassError.visible}
