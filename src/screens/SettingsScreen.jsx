@@ -19,6 +19,7 @@ import {
   setPassword,
 } from "../utils/api";
 import { UserContext } from "../utils/UserContext";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const SettingsScreen = () => {
   const { user, setUser } = useContext(UserContext);
@@ -29,7 +30,9 @@ const SettingsScreen = () => {
     message: "",
   });
   const [newPassword, setNewPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(true);
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(true);
   const [passwordStatus, setPasswordStatus] = useState({
     type: "error" || "info",
     visible: false,
@@ -136,79 +139,93 @@ const SettingsScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <View style={styles.input}>
-          <TextInput
-            label="Display Name"
-            value={newDisplayName}
-            onChangeText={(text) => setNewDisplayName(text)}
-            style={styles.textInput}
-          />
-          <HelperText
-            type={displayNameStatus.type}
-            visible={displayNameStatus.visible}
+      <KeyboardAwareScrollView>
+        <View style={styles.container}>
+          <View style={styles.input}>
+            <TextInput
+              label="Display Name"
+              value={newDisplayName}
+              onChangeText={(text) => setNewDisplayName(text)}
+              style={styles.textInput}
+            />
+            <HelperText
+              type={displayNameStatus.type}
+              visible={displayNameStatus.visible}
+            >
+              {displayNameStatus.message}
+            </HelperText>
+            <Button
+              mode="contained"
+              style={styles.button}
+              onPress={onChangeDisplayNamePress}
+            >
+              Change Display Name
+            </Button>
+          </View>
+          <View style={styles.input}>
+            <TextInput
+              label="New Password"
+              value={newPassword}
+              onChangeText={(text) => setNewPassword(text)}
+              style={styles.textInput}
+              secureTextEntry={showNewPassword}
+              right={
+                <TextInput.Icon
+                  name={showNewPassword ? "eye" : "eye-off"}
+                  onPress={() => setShowNewPassword(!showNewPassword)}
+                />
+              }
+            />
+            <TextInput
+              label="Confirm New Password"
+              value={confirmNewPassword}
+              onChangeText={(text) => setConfirmNewPassword(text)}
+              style={styles.textInput}
+              secureTextEntry={showConfirmNewPassword}
+              right={
+                <TextInput.Icon
+                  name={showConfirmNewPassword ? "eye" : "eye-off"}
+                  onPress={() =>
+                    setShowConfirmNewPassword(!showConfirmNewPassword)
+                  }
+                />
+              }
+            />
+            <HelperText
+              type={passwordStatus.type}
+              visible={passwordStatus.visible}
+            >
+              {passwordStatus.message}
+            </HelperText>
+            <Button
+              mode="contained"
+              style={styles.button}
+              onPress={onUpdatePasswordPress}
+            >
+              Update Password
+            </Button>
+          </View>
+          <View
+            style={{ ...styles.input, marginBottom: "5%" }}
+            behavior={"height"}
           >
-            {displayNameStatus.message}
-          </HelperText>
-          <Button
-            mode="contained"
-            style={styles.button}
-            onPress={onChangeDisplayNamePress}
-          >
-            Change Display Name
-          </Button>
-        </View>
-        <View style={styles.input}>
-          <TextInput
-            label="New Password"
-            value={newPassword}
-            onChangeText={(text) => setNewPassword(text)}
-            style={styles.textInput}
-            secureTextEntry={true}
-          />
-          <TextInput
-            label="Confirm New Password"
-            value={confirmNewPassword}
-            onChangeText={(text) => setConfirmNewPassword(text)}
-            style={styles.textInput}
-            secureTextEntry={true}
-          />
-          <HelperText
-            type={passwordStatus.type}
-            visible={passwordStatus.visible}
-          >
-            {passwordStatus.message}
-          </HelperText>
-          <Button
-            mode="contained"
-            style={styles.button}
-            onPress={onUpdatePasswordPress}
-          >
-            Update Password
-          </Button>
-        </View>
-        <KeyboardAvoidingView
-          style={{ ...styles.input, marginBottom: "5%" }}
-          behavior={"height"}
-        >
-          <TextInput
-            label="Email"
-            value={newEmail}
-            onChangeText={(text) => setNewEmail(text)}
-            style={styles.textInput}
-          />
-          <HelperText type={emailStatus.type} visible={emailStatus.visible}>
-            {emailStatus.message}
-          </HelperText>
-          <Button
-            mode="contained"
-            style={styles.button}
-            onPress={onUpdateEmailPress}
-          >
-            Update Email
-          </Button>
-        </KeyboardAvoidingView>
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+            <TextInput
+              label="Email"
+              value={newEmail}
+              onChangeText={(text) => setNewEmail(text)}
+              style={styles.textInput}
+            />
+            <HelperText type={emailStatus.type} visible={emailStatus.visible}>
+              {emailStatus.message}
+            </HelperText>
+            <Button
+              mode="contained"
+              style={styles.button}
+              onPress={onUpdateEmailPress}
+            >
+              Update Email
+            </Button>
+          </View>
           <Button
             mode="contained"
             color="red"
@@ -218,7 +235,7 @@ const SettingsScreen = () => {
             Logout
           </Button>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
@@ -249,5 +266,6 @@ const styles = StyleSheet.create({
   logoutButton: {
     width: "40%",
     marginHorizontal: "10%",
+    alignSelf: "center",
   },
 });
