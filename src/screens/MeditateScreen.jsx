@@ -32,9 +32,9 @@ const MeditateScreen = () => {
         ]),
         Animated.parallel([
           Animated.timing(textOpacity, {
-            delay: 100,
+            delay: 1000,
             toValue: 0,
-            duration: 300,
+            duration: 200,
             useNativeDriver: true,
           }),
           Animated.timing(translation, {
