@@ -33,6 +33,7 @@ import FadeIn from "react-native-fade-in-image";
 const LoginScreen = () => {
   const [email, setEmail] = useState(""); //update from [username, setUsername]
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
   const [emailOrPassError, setEmailOrPassError] = useState({
     type: "error" || "info",
     visible: false,
@@ -127,7 +128,13 @@ const LoginScreen = () => {
             value={password}
             onChangeText={(text) => setPassword(text)}
             style={styles.textInput}
-            secureTextEntry={true}
+            secureTextEntry={showPassword}
+            right={
+              <TextInput.Icon
+                name={showPassword ? "eye" : "eye-off"}
+                onPress={() => setShowPassword(!showPassword)}
+              />
+            }
           />
           <Button
             mode="contained"
