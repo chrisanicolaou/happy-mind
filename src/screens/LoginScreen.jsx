@@ -128,11 +128,20 @@ const LoginScreen = () => {
           >
             Login
           </Button>
-          <Button mode="text" onPress={onForgotPasswordPressed} color="red">
+          <Button
+            mode="text"
+            onPress={onForgotPasswordPressed}
+            color="red"
+            style={styles.textButton}
+          >
             Forgot Password?
           </Button>
-          <Button mode="text" onPress={onSignUpPressed}>
-            Don't have an account? Sign Up
+          <Button
+            mode="text"
+            onPress={onSignUpPressed}
+            style={styles.textButton}
+          >
+            Create An Account
           </Button>
           {/* <>{emailOrPassError ? <Text> {emailOrPassError} </Text> : null}</>
 
@@ -195,6 +204,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: "2%",
     marginBottom: "5%",
+  },
+  textButton: {
+    width: "75%",
+    alignSelf: "center",
   },
 });
 
