@@ -40,13 +40,13 @@ const PickInterestsScreen = () => {
       <View
         style={{
           flex: 1,
-          paddingTop: "2%",
+          paddingTop: "5%",
           alignItems: "center",
           flexDirection: "column",
-          marginBottom: "10%",
+          backgroundColor: "rgba(110, 0, 250, 0.3)",
         }}
       >
-        <Headline>Find a new hobby!</Headline>
+        <Headline style={styles.header}>Find a new hobby!</Headline>
         <View style={styles.interestsContainer}>
           <TouchableOpacity
             onPress={() => onInterestPress("languages")}
@@ -63,7 +63,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"Art"}
-              itemImage={require("../../images/Art.jpeg")}
+              itemImage={require("../../images/Art.jpg")}
             />
           </TouchableOpacity>
 
@@ -92,7 +92,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"Music"}
-              itemImage={require("../../images/Music.jpg")}
+              itemImage={require("../../images/Music.jpeg")}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -119,7 +119,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"DIY"}
-              itemImage={require("../../images/DIY.png")}
+              itemImage={require("../../images/DIY.jpeg")}
             />
           </TouchableOpacity>
         </View>
@@ -134,9 +134,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     flexWrap: "wrap",
-    height: "90%",
+    height: "60%",
     width: "80%",
     marginTop: "5%",
+    marginBottom: "5%",
+    backgroundColor: "rgba(100, 20, 200, 0)",
   },
   cardContainer: {
     height: "20%",
@@ -144,7 +146,13 @@ const styles = StyleSheet.create({
     margin: "5%",
   },
   buttonItem: {
-    padding: "5%",
+    padding: "3.5%",
+    // backgroundColor: "#9370db",
+  },
+  header: {
+    fontSize: 30,
+    fontFamily: "Bodoni 72",
+    textDecorationLine: "underline",
   },
 });
 

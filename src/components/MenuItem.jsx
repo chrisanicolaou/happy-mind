@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 20,
     textAlign: "center",
+    fontFamily: "Avenir-HeavyOblique",
   },
 });
 
