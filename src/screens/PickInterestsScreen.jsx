@@ -35,91 +35,95 @@ const PickInterestsScreen = () => {
     <SafeAreaView
       style={{
         flex: 1,
-        paddingTop: "15%",
-        alignItems: "center",
-        flexDirection: "column",
-        marginBottom: "10%",
       }}
     >
-      <Headline>Find a new hobby!</Headline>
-      <View style={styles.interestsContainer}>
-        <TouchableOpacity
-          onPress={() => onInterestPress("languages")}
-          style={styles.buttonItem}
-        >
-          <MenuItem
-            text={"Languages"}
-            itemImage={require("../../images/Languages.jpeg")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => onInterestPress("art")}
-          style={styles.buttonItem}
-        >
-          <MenuItem text={"Art"} itemImage={require("../../images/Art.jpeg")} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => onInterestPress("gaming")}
-          style={styles.buttonItem}
-        >
-          <MenuItem
-            text={"Gaming"}
-            itemImage={require("../../images/Gaming.jpeg")}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => onInterestPress("sports")}
-          style={styles.buttonItem}
-        >
-          <MenuItem
-            text={"Sports"}
-            itemImage={require("../../images/Football.jpeg")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => onInterestPress("sports")}
-          style={styles.buttonItem}
-        >
-          <MenuItem
-            text={"Music"}
-            itemImage={require("../../images/Music.jpg")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => onInterestPress("sports")}
-          style={styles.buttonItem}
-        >
-          <MenuItem
-            text={"Coding"}
-            itemImage={require("../../images/Coding.jpg")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => onInterestPress("sports")}
-          style={styles.buttonItem}
-        >
-          <MenuItem
-            text={"Science"}
-            itemImage={require("../../images/Science.jpg")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => onInterestPress("sports")}
-          style={styles.buttonItem}
-        >
-          <MenuItem text={"DIY"} itemImage={require("../../images/DIY.png")} />
-        </TouchableOpacity>
-      </View>
-      <Button
-        mode="contained"
-        onPress={() => {
-          navigation.navigate("Homepage");
+      <View
+        style={{
+          flex: 1,
+          paddingTop: "2%",
+          alignItems: "center",
+          flexDirection: "column",
+          marginBottom: "10%",
         }}
       >
-        Back
-      </Button>
+        <Headline>Find a new hobby!</Headline>
+        <View style={styles.interestsContainer}>
+          <TouchableOpacity
+            onPress={() => onInterestPress("languages")}
+            style={styles.buttonItem}
+          >
+            <MenuItem
+              text={"Languages"}
+              itemImage={require("../../images/Languages.jpeg")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onInterestPress("art")}
+            style={styles.buttonItem}
+          >
+            <MenuItem
+              text={"Art"}
+              itemImage={require("../../images/Art.jpeg")}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => onInterestPress("gaming")}
+            style={styles.buttonItem}
+          >
+            <MenuItem
+              text={"Gaming"}
+              itemImage={require("../../images/Gaming.jpeg")}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => onInterestPress("sports")}
+            style={styles.buttonItem}
+          >
+            <MenuItem
+              text={"Sports"}
+              itemImage={require("../../images/Football.jpeg")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onInterestPress("sports")}
+            style={styles.buttonItem}
+          >
+            <MenuItem
+              text={"Music"}
+              itemImage={require("../../images/Music.jpg")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onInterestPress("sports")}
+            style={styles.buttonItem}
+          >
+            <MenuItem
+              text={"Coding"}
+              itemImage={require("../../images/Coding.jpg")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onInterestPress("sports")}
+            style={styles.buttonItem}
+          >
+            <MenuItem
+              text={"Science"}
+              itemImage={require("../../images/Science.jpg")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onInterestPress("sports")}
+            style={styles.buttonItem}
+          >
+            <MenuItem
+              text={"DIY"}
+              itemImage={require("../../images/DIY.png")}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
