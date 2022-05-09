@@ -46,10 +46,15 @@ const App = () => {
     dark: true,
     mode: "exact",
     colors: {
+      ...DefaultTheme.colors,
+      error: "#975E6A",
       background: "#312F2F",
       primary: "#8FAACC",
       placeholder: "white",
       text: "white",
+    },
+    animation: {
+      scale: 1.0,
     },
   };
 

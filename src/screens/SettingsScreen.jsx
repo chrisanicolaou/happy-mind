@@ -145,18 +145,18 @@ const SettingsScreen = () => {
         <View style={styles.container}>
           <View style={{ flex: 1, flexDirection: "row" }}>
             <View style={styles.displayInput}>
-              <TextInput
-                label="Display Name"
-                value={newDisplayName}
-                onChangeText={(text) => setNewDisplayName(text)}
-                style={styles.textInput}
-              />
               <HelperText
                 type={displayNameStatus.type}
                 visible={displayNameStatus.visible}
               >
                 {displayNameStatus.message}
               </HelperText>
+              <TextInput
+                label="Display Name"
+                value={newDisplayName}
+                onChangeText={(text) => setNewDisplayName(text)}
+                style={styles.textInput}
+              />
               <Button
                 mode="contained"
                 style={styles.button}
@@ -177,6 +177,12 @@ const SettingsScreen = () => {
             </View>
           </View>
           <View style={styles.input}>
+            <HelperText
+              type={passwordStatus.type}
+              visible={passwordStatus.visible}
+            >
+              {passwordStatus.message}
+            </HelperText>
             <TextInput
               label="New Password"
               value={newPassword}
@@ -205,12 +211,6 @@ const SettingsScreen = () => {
                 />
               }
             />
-            <HelperText
-              type={passwordStatus.type}
-              visible={passwordStatus.visible}
-            >
-              {passwordStatus.message}
-            </HelperText>
             <Button
               mode="contained"
               style={styles.button}
@@ -223,15 +223,15 @@ const SettingsScreen = () => {
             style={{ ...styles.input, marginBottom: "5%" }}
             behavior={"height"}
           >
+            <HelperText type={emailStatus.type} visible={emailStatus.visible}>
+              {emailStatus.message}
+            </HelperText>
             <TextInput
               label="Email"
               value={newEmail}
               onChangeText={(text) => setNewEmail(text)}
               style={styles.textInput}
             />
-            <HelperText type={emailStatus.type} visible={emailStatus.visible}>
-              {emailStatus.message}
-            </HelperText>
             <Button
               mode="contained"
               style={styles.button}

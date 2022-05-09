@@ -22,6 +22,7 @@ import { useNavigation } from "@react-navigation/native";
 import { signUpUser } from "../utils/api";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Button, HelperText, TextInput } from "react-native-paper";
+import ThemeView from "../components/ThemeView";
 
 const SignUpScreen = () => {
   const [username, setUsername] = useState("");
@@ -193,81 +194,83 @@ const SignUpScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
-        <View style={styles.root}>
-          <HelperText
-            type={displayNameError.type}
-            visible={displayNameError.visible}
-            style={{ alignSelf: "center" }}
-          >
-            {displayNameError.message}
-          </HelperText>
-          <TextInput
-            label="Display Name"
-            style={styles.textInput}
-            onChangeText={(text) => setUsername(text)}
-            onBlur={checkDisplayName}
-          />
-          <HelperText
-            type={emailError.type}
-            visible={emailError.visible}
-            style={{ alignSelf: "center" }}
-          >
-            {emailError.message}
-          </HelperText>
-          <TextInput
-            label="Email"
-            style={styles.textInput}
-            onChangeText={(text) => setEmail(text)}
-            onBlur={checkEmail}
-          />
-          <HelperText
-            type={passwordError.type}
-            visible={passwordError.visible}
-            style={{ alignSelf: "center" }}
-          >
-            {passwordError.message}
-          </HelperText>
-          <TextInput
-            label="Password"
-            style={styles.textInput}
-            onChangeText={(text) => setPassword(text)}
-            onBlur={checkPassword}
-            secureTextEntry={showPassword}
-            right={
-              <TextInput.Icon
-                name={showPassword ? "eye" : "eye-off"}
-                onPress={() => setShowPassword(!showPassword)}
-              />
-            }
-          />
-          <TextInput
-            label="Repeat Password"
-            style={styles.textInput}
-            onChangeText={(text) => setPasswordRepeat(text)}
-            onBlur={checkPassword}
-            secureTextEntry={showPasswordRepeat}
-            right={
-              <TextInput.Icon
-                name={showPasswordRepeat ? "eye" : "eye-off"}
-                onPress={() => setShowPasswordRepeat(!showPasswordRepeat)}
-              />
-            }
-          />
-          <Button
-            mode="contained"
-            style={styles.button}
-            onPress={onRegisterPressed}
-          >
-            Register
-          </Button>
-          <Button
-            mode="text"
-            onPress={onSignInPressed}
-            style={styles.textButton}
-          >
-            Back to Login
-          </Button>
-        </View>
+        <ThemeView>
+          <View style={styles.root}>
+            <HelperText
+              type={displayNameError.type}
+              visible={displayNameError.visible}
+              style={{ alignSelf: "center" }}
+            >
+              {displayNameError.message}
+            </HelperText>
+            <TextInput
+              label="Display Name"
+              style={styles.textInput}
+              onChangeText={(text) => setUsername(text)}
+              onBlur={checkDisplayName}
+            />
+            <HelperText
+              type={emailError.type}
+              visible={emailError.visible}
+              style={{ alignSelf: "center" }}
+            >
+              {emailError.message}
+            </HelperText>
+            <TextInput
+              label="Email"
+              style={styles.textInput}
+              onChangeText={(text) => setEmail(text)}
+              onBlur={checkEmail}
+            />
+            <HelperText
+              type={passwordError.type}
+              visible={passwordError.visible}
+              style={{ alignSelf: "center" }}
+            >
+              {passwordError.message}
+            </HelperText>
+            <TextInput
+              label="Password"
+              style={styles.textInput}
+              onChangeText={(text) => setPassword(text)}
+              onBlur={checkPassword}
+              secureTextEntry={showPassword}
+              right={
+                <TextInput.Icon
+                  name={showPassword ? "eye" : "eye-off"}
+                  onPress={() => setShowPassword(!showPassword)}
+                />
+              }
+            />
+            <TextInput
+              label="Repeat Password"
+              style={styles.textInput}
+              onChangeText={(text) => setPasswordRepeat(text)}
+              onBlur={checkPassword}
+              secureTextEntry={showPasswordRepeat}
+              right={
+                <TextInput.Icon
+                  name={showPasswordRepeat ? "eye" : "eye-off"}
+                  onPress={() => setShowPasswordRepeat(!showPasswordRepeat)}
+                />
+              }
+            />
+            <Button
+              mode="contained"
+              style={styles.button}
+              onPress={onRegisterPressed}
+            >
+              Register
+            </Button>
+            <Button
+              mode="text"
+              onPress={onSignInPressed}
+              style={styles.textButton}
+            >
+              Back to Login
+            </Button>
+          </View>
+        </ThemeView>
       </KeyboardAwareScrollView>
     </SafeAreaView>
     // <ScrollView>

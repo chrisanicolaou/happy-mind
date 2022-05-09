@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import { resetPassword } from "../utils/api";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Button, HelperText, TextInput } from "react-native-paper";
+import ThemeView from "../components/ThemeView";
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
@@ -68,36 +69,42 @@ const ForgotPasswordScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
-        <View style={styles.root}>
-          <Image
-            source={require("../../assets/forgot-password.png")}
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <HelperText
-            type={message.type}
-            visible={message.visible}
-            style={{ alignSelf: "center" }}
-          >
-            {message.message}
-          </HelperText>
-          <TextInput
-            label="Email"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            style={styles.textInput}
-          />
-          <Button mode="contained" style={styles.button} onPress={onResetPress}>
-            Send Reset Link
-          </Button>
-          <Button
-            mode="text"
-            onPress={onSignInPressed}
-            style={styles.textButton}
-          >
-            Back To Login
-          </Button>
-        </View>
+        <ThemeView>
+          <View style={styles.root}>
+            <Image
+              source={require("../../assets/forgot-password.png")}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+            <HelperText
+              type={message.type}
+              visible={message.visible}
+              style={{ alignSelf: "center" }}
+            >
+              {message.message}
+            </HelperText>
+            <TextInput
+              label="Email"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              style={styles.textInput}
+            />
+            <Button
+              mode="contained"
+              style={styles.button}
+              onPress={onResetPress}
+            >
+              Send Reset Link
+            </Button>
+            <Button
+              mode="text"
+              onPress={onSignInPressed}
+              style={styles.textButton}
+            >
+              Back To Login
+            </Button>
+          </View>
+        </ThemeView>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
