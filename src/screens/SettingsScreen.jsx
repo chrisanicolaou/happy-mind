@@ -1,16 +1,12 @@
-import {
-  KeyboardAvoidingView,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import React, { useState, useContext } from "react";
 import {
   Button,
   DefaultTheme,
   HelperText,
+  Switch,
   TextInput,
+  Text,
 } from "react-native-paper";
 import {
   logUserOut,
@@ -20,9 +16,11 @@ import {
 } from "../utils/api";
 import { UserContext } from "../utils/UserContext";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { DarkContext } from "../utils/DarkContext";
 
 const SettingsScreen = () => {
   const { user, setUser } = useContext(UserContext);
+  const { dark, setDark } = useContext(DarkContext);
   const [newDisplayName, setNewDisplayName] = useState("");
   const [displayNameStatus, setDisplayNameStatus] = useState({
     type: "error" || "info",
@@ -137,30 +135,46 @@ const SettingsScreen = () => {
     setUser("");
   };
 
+  const toggleDarkMode = () => {
+    setDark(!dark);
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
         <View style={styles.container}>
-          <View style={styles.input}>
-            <TextInput
-              label="Display Name"
-              value={newDisplayName}
-              onChangeText={(text) => setNewDisplayName(text)}
-              style={styles.textInput}
-            />
-            <HelperText
-              type={displayNameStatus.type}
-              visible={displayNameStatus.visible}
+          <View style={{ flex: 1, flexDirection: "row" }}>
+            <View style={styles.displayInput}>
+              <TextInput
+                label="Display Name"
+                value={newDisplayName}
+                onChangeText={(text) => setNewDisplayName(text)}
+                style={styles.textInput}
+              />
+              <HelperText
+                type={displayNameStatus.type}
+                visible={displayNameStatus.visible}
+              >
+                {displayNameStatus.message}
+              </HelperText>
+              <Button
+                mode="contained"
+                style={styles.button}
+                onPress={onChangeDisplayNamePress}
+              >
+                Change
+              </Button>
+            </View>
+            <View
+              style={{
+                alignSelf: "center",
+                flex: 1,
+                alignItems: "center",
+              }}
             >
-              {displayNameStatus.message}
-            </HelperText>
-            <Button
-              mode="contained"
-              style={styles.button}
-              onPress={onChangeDisplayNamePress}
-            >
-              Change Display Name
-            </Button>
+              <Text style={{ paddingBottom: 10 }}>Dark Mode</Text>
+              <Switch value={dark} onValueChange={toggleDarkMode} />
+            </View>
           </View>
           <View style={styles.input}>
             <TextInput
@@ -228,7 +242,7 @@ const SettingsScreen = () => {
           </View>
           <Button
             mode="contained"
-            color="red"
+            color="#de0000"
             style={styles.logoutButton}
             onPress={onLogoutPress}
           >
@@ -253,6 +267,11 @@ const styles = StyleSheet.create({
   input: {
     paddingHorizontal: "10%",
     marginTop: "5%",
+  },
+  displayInput: {
+    paddingLeft: "10%",
+    marginTop: "5%",
+    width: "65%",
   },
   textInput: {
     marginBottom: 10,
