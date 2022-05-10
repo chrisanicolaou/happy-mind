@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { RadioButton } from "react-native-paper";
+import { StyleSheet, Text, View } from "react-native";
+import { RadioButton, Avatar } from "react-native-paper";
 import React, { useState } from "react";
 import CustomButton from "../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
@@ -24,12 +24,11 @@ const FitnessOptionsScreen = () => {
     }
   };
 
-  const onBackButtonPress = () => {
-    navigation.navigate("Homepage");
-  };
   return (
     <View style={styles.root}>
-      <Text>Workout Intensity</Text>
+      <Text style={[styles.big, styles.greenUnderline, styles.margin]}>
+        Workout Intensity
+      </Text>
       <RadioButton.Group
         onValueChange={(newValue) => setWorkoutDifficulty(newValue)}
         value={workoutDifficulty}
@@ -37,19 +36,33 @@ const FitnessOptionsScreen = () => {
         <View style={styles.radioButtonsContainer}>
           <View style={styles.radioButton}>
             <RadioButton value="light" />
-            <Text>Light</Text>
+            <Text>{"\n"}Light</Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/light.png")}
+            />
           </View>
           <View style={styles.radioButton}>
             <RadioButton value="average" />
-            <Text>Average</Text>
+            <Text>{"\n"}Average</Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/average.png")}
+            />
           </View>
           <View style={styles.radioButton}>
             <RadioButton value="intense" />
-            <Text>Intense</Text>
+            <Text>{"\n"}Intense</Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/intense.png")}
+            />
           </View>
         </View>
       </RadioButton.Group>
-      <Text>What would you like to workout?</Text>
+      <Text style={[styles.big, styles.greenUnderline]}>
+        What would you like to workout?
+      </Text>
       <RadioButton.Group
         onValueChange={(newValue) => setWorkoutType(newValue)}
         value={workoutType}
@@ -57,25 +70,47 @@ const FitnessOptionsScreen = () => {
         <View style={styles.radioButtonsContainer}>
           <View style={styles.radioButton}>
             <RadioButton value="cardio" />
-            <Text>Cardio</Text>
+            <Text>{"\n"}Cardio</Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/cardio.png")}
+            />
           </View>
           <View style={styles.radioButton}>
             <RadioButton value="muscles" />
-            <Text>Muscles</Text>
+            <Text>{"\n"}Muscles</Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/muscle.png")}
+            />
+            <Text>{"\n"}</Text>
           </View>
           <View style={styles.radioButton}>
             <RadioButton value="flexibility" />
-            <Text>Flexibility</Text>
+            <Text>
+              {"\n"}Flexibility{"\n"}
+            </Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/flexiblity.png")}
+            />
           </View>
         </View>
       </RadioButton.Group>
+
+      <Text>
+        {"\n"}My intensity level: {workoutDifficulty}
+        {"\n"}
+      </Text>
+      <Text style={styles.textSpace}>
+        My workout type: {workoutType}
+        {"\n"}
+        {"\n"}
+      </Text>
       <CustomButton
         text="Get Active!"
         onPress={onWorkoutButtonPress}
       ></CustomButton>
-      <TouchableOpacity onPress={onBackButtonPress}>
-        <Text>Back</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -86,12 +121,30 @@ const styles = StyleSheet.create({
   root: {
     alignItems: "center",
     padding: 60,
+    backgroundColor: "orange",
+    flex: 1,
   },
   radioButtonsContainer: {
     display: "flex",
     flexDirection: "row",
+    flex: 0.25,
   },
   radioButton: {
     paddingHorizontal: 20,
+    backgroundColor: "purple",
+    marginBottom: 0.4,
+  },
+  big: {
+    fontSize: 15,
+    flex: 0.15,
+    paddingTop: 0.5,
+    marginBottom: 11,
+  },
+  greenUnderline: {
+    textDecorationLine: "underline",
+    fontWeight: "bold",
+  },
+  text: {
+    paddingBottom: 10,
   },
 });
