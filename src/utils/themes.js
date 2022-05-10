@@ -26,6 +26,7 @@ export const darkTheme = {
     primary: "#8FAACC",
     placeholder: "white",
     text: "white",
+    surface: "#4a4747",
   },
   animation: {
     scale: 1.0,
