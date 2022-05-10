@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { RadioButton } from "react-native-paper";
+import { RadioButton, Avatar } from "react-native-paper";
 import React, { useState } from "react";
 import CustomButton from "../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
@@ -24,12 +24,11 @@ const FitnessOptionsScreen = () => {
     }
   };
 
-  const onBackButtonPress = () => {
-    navigation.navigate("Homepage");
-  };
   return (
     <View style={styles.root}>
-      <Text style={[styles.big, styles.greenUnderline]}>Workout Intensity</Text>
+      <Text style={[styles.big, styles.greenUnderline, styles.margin]}>
+        Workout Intensity
+      </Text>
       <RadioButton.Group
         onValueChange={(newValue) => setWorkoutDifficulty(newValue)}
         value={workoutDifficulty}
@@ -38,14 +37,26 @@ const FitnessOptionsScreen = () => {
           <View style={styles.radioButton}>
             <RadioButton value="light" />
             <Text>{"\n"}Light</Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/light.png")}
+            />
           </View>
           <View style={styles.radioButton}>
             <RadioButton value="average" />
             <Text>{"\n"}Average</Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/average.png")}
+            />
           </View>
           <View style={styles.radioButton}>
             <RadioButton value="intense" />
             <Text>{"\n"}Intense</Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/intense.png")}
+            />
           </View>
         </View>
       </RadioButton.Group>
@@ -60,22 +71,37 @@ const FitnessOptionsScreen = () => {
           <View style={styles.radioButton}>
             <RadioButton value="cardio" />
             <Text>{"\n"}Cardio</Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/cardio.png")}
+            />
           </View>
           <View style={styles.radioButton}>
             <RadioButton value="muscles" />
             <Text>{"\n"}Muscles</Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/muscle.png")}
+            />
+            <Text>{"\n"}</Text>
           </View>
           <View style={styles.radioButton}>
             <RadioButton value="flexibility" />
-            <Text>{"\n"}Flexibility</Text>
+            <Text>
+              {"\n"}Flexibility{"\n"}
+            </Text>
+            <Avatar.Image
+              size={80}
+              source={require("../../images/flexiblity.png")}
+            />
           </View>
         </View>
       </RadioButton.Group>
+
       <Text>
-        My intensity level: {workoutDifficulty}
+        {"\n"}My intensity level: {workoutDifficulty}
         {"\n"}
       </Text>
-
       <Text style={styles.textSpace}>
         My workout type: {workoutType}
         {"\n"}
@@ -106,18 +132,19 @@ const styles = StyleSheet.create({
   radioButton: {
     paddingHorizontal: 20,
     backgroundColor: "purple",
+    marginBottom: 0.4,
   },
   big: {
     fontSize: 15,
     flex: 0.15,
+    paddingTop: 0.5,
+    marginBottom: 11,
   },
   greenUnderline: {
-    color: "green",
     textDecorationLine: "underline",
-    fontStyle: "italic",
     fontWeight: "bold",
   },
-  textSpacee: {
-    lineHeight: 30,
+  text: {
+    paddingBottom: 10,
   },
 });
