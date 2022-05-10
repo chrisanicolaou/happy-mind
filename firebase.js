@@ -23,7 +23,6 @@ if (getApps().length === 0) {
     persistence: getReactNativePersistence(AsyncStorage),
   });
   db = getFirestore(app);
-  let test;
 }
 
 export { auth, db };

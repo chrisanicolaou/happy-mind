@@ -29,6 +29,8 @@ import {
 } from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import FadeIn from "react-native-fade-in-image";
+import { DarkContext } from "../utils/DarkContext";
+import ThemeView from "../components/ThemeView";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState(""); //update from [username, setUsername]
@@ -43,6 +45,7 @@ const LoginScreen = () => {
   // const { height } = useWindowDimensions();
   const navigation = useNavigation();
   const { setUser } = useContext(UserContext);
+  const { dark } = useContext(DarkContext);
 
   const onLoginPressed = async () => {
     //Refactored - see api.js for details
@@ -106,59 +109,68 @@ const LoginScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
-        <View style={styles.root}>
-          <FadeIn placeholderStyle={{ backgroundColor: "#f6f6f6" }}>
-            <Image source={Logo} style={styles.logo} />
-          </FadeIn>
-          <HelperText
-            type={emailOrPassError.type}
-            visible={emailOrPassError.visible}
-            style={{ alignSelf: "center" }}
+        <ThemeView>
+          <View
+            style={{
+              ...styles.root,
+            }}
           >
-            {emailOrPassError.message}
-          </HelperText>
-          <TextInput
-            label="Email"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            style={styles.textInput}
-          />
-          <TextInput
-            label="Password"
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            style={styles.textInput}
-            secureTextEntry={showPassword}
-            right={
-              <TextInput.Icon
-                name={showPassword ? "eye" : "eye-off"}
-                onPress={() => setShowPassword(!showPassword)}
-              />
-            }
-          />
-          <Button
-            mode="contained"
-            style={styles.button}
-            onPress={onLoginPressed}
-          >
-            Login
-          </Button>
-          <Button
-            mode="text"
-            onPress={onForgotPasswordPressed}
-            color="red"
-            style={styles.textButton}
-          >
-            Forgot Password?
-          </Button>
-          <Button
-            mode="text"
-            onPress={onSignUpPressed}
-            style={styles.textButton}
-          >
-            Create An Account
-          </Button>
-          {/* <>{emailOrPassError ? <Text> {emailOrPassError} </Text> : null}</>
+            <FadeIn
+              placeholderStyle={{
+                backgroundColor: dark ? "#312F2F" : "#f6f6f6",
+              }}
+            >
+              <Image source={Logo} style={styles.logo} />
+            </FadeIn>
+            <HelperText
+              type={emailOrPassError.type}
+              visible={emailOrPassError.visible}
+              style={{ alignSelf: "center" }}
+            >
+              {emailOrPassError.message}
+            </HelperText>
+            <TextInput
+              label="Email"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              style={styles.textInput}
+            />
+            <TextInput
+              label="Password"
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              style={styles.textInput}
+              secureTextEntry={showPassword}
+              right={
+                <TextInput.Icon
+                  name={showPassword ? "eye" : "eye-off"}
+                  onPress={() => setShowPassword(!showPassword)}
+                />
+              }
+            />
+            <Button
+              mode="contained"
+              style={styles.button}
+              onPress={onLoginPressed}
+            >
+              Login
+            </Button>
+            <Button
+              mode="text"
+              onPress={onForgotPasswordPressed}
+              color="red"
+              style={styles.textButton}
+            >
+              Forgot Password?
+            </Button>
+            <Button
+              mode="text"
+              onPress={onSignUpPressed}
+              style={styles.textButton}
+            >
+              Create An Account
+            </Button>
+            {/* <>{emailOrPassError ? <Text> {emailOrPassError} </Text> : null}</>
 
 <CustomInput placeholder="Email" value={email} setValue={setEmail} />
 <CustomInput
@@ -192,7 +204,8 @@ text="Don't have an account? Create one"
 onPress={onSignUpPressed}
 type="TERTIARY"
 /> */}
-        </View>
+          </View>
+        </ThemeView>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
