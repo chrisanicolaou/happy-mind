@@ -2,7 +2,6 @@ import { SafeAreaView, StyleSheet, View } from "react-native";
 import React, { useState, useContext } from "react";
 import {
   Button,
-  DefaultTheme,
   HelperText,
   Switch,
   TextInput,
@@ -19,8 +18,12 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { DarkContext } from "../utils/DarkContext";
 
 const SettingsScreen = () => {
+  // -----CONTEXTS-----
   const { user, setUser } = useContext(UserContext);
   const { dark, setDark } = useContext(DarkContext);
+
+  // -----STATES-----
+
   const [newDisplayName, setNewDisplayName] = useState("");
   const [displayNameStatus, setDisplayNameStatus] = useState({
     type: "error" || "info",
@@ -42,6 +45,8 @@ const SettingsScreen = () => {
     visible: false,
     message: "",
   });
+
+  // -----FUNCTIONS-----
 
   const onChangeDisplayNamePress = async () => {
     try {
@@ -138,6 +143,8 @@ const SettingsScreen = () => {
   const toggleDarkMode = () => {
     setDark(!dark);
   };
+
+  // -----RENDER-----
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -254,7 +261,7 @@ const SettingsScreen = () => {
   );
 };
 
-export default SettingsScreen;
+// -----STYLES-----
 
 const styles = StyleSheet.create({
   container: {
@@ -287,3 +294,5 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
+
+export default SettingsScreen;
