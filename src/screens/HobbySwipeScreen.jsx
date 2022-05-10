@@ -5,6 +5,7 @@ import {
   ScrollView,
   Linking,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { Avatar, Card, Paragraph, Title } from "react-native-paper";
@@ -13,6 +14,7 @@ import GestureRecognizer from "react-native-swipe-gestures";
 import Carousel from "react-native-snap-carousel";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
+import ThemeView from "../components/ThemeView";
 
 const HobbySwipeScreen = ({ route }) => {
   const { hobbiesArr } = route.params;
@@ -97,36 +99,31 @@ const HobbySwipeScreen = ({ route }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          justifyContent: "center",
-          paddingTop: "3%",
-        }}
-      >
-        <Carousel
-          lockScrollWhileSnapping={true}
-          swipeThreshold={10}
-          layout={"default"}
-          ref={carousel}
-          data={hobbies}
-          sliderWidth={380}
-          itemWidth={300}
-          renderItem={renderItem}
-          onSnapToItem={(index) => {
-            SetCurrIndex(index);
-            setIsViewingDetails(false);
-          }}
-        />
-      </View>
-      <Button
-        mode="contained"
-        onPress={onBackButtonPress}
-        style={styles.backButton}
-      >
-        Back
-      </Button>
+      <ThemeView>
+        <View style={styles.root}>
+          <Carousel
+            lockScrollWhileSnapping={true}
+            swipeThreshold={10}
+            layout={"default"}
+            ref={carousel}
+            data={hobbies}
+            sliderWidth={380}
+            itemWidth={300}
+            renderItem={renderItem}
+            onSnapToItem={(index) => {
+              SetCurrIndex(index);
+              setIsViewingDetails(false);
+            }}
+          />
+        </View>
+        <Button
+          mode="contained"
+          onPress={onBackButtonPress}
+          style={styles.backButton}
+        >
+          Back
+        </Button>
+      </ThemeView>
     </SafeAreaView>
   );
 };
@@ -134,8 +131,10 @@ const HobbySwipeScreen = ({ route }) => {
 const styles = StyleSheet.create({
   root: {
     alignItems: "center",
-    paddingVertical: 60,
     paddingHorizontal: 10,
+    paddingTop: 10,
+    height: Dimensions.get("window").height - 120,
+    width: Dimensions.get("window").width,
   },
   card: {
     paddingBottom: 10,
@@ -159,6 +158,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 10,
     marginBottom: "3%",
+  },
+  store: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingTop: "3%",
   },
 });
 
