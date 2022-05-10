@@ -1,37 +1,32 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Linking,
-  TouchableOpacity,
-  SafeAreaView,
-  Dimensions,
-} from "react-native";
-import React, { useState, useRef, useCallback } from "react";
-import CustomButton from "../components/CustomButton";
+import { View, StyleSheet, SafeAreaView, Dimensions } from "react-native";
+import React, { useState, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
-import GestureRecognizer, {
-  swipeDirections,
-} from "react-native-swipe-gestures";
 import Carousel from "react-native-snap-carousel";
 import { Button, Card, Paragraph, Title } from "react-native-paper";
 import { WebView } from "react-native-webview";
-import { isValidTimestamp } from "@firebase/util";
 import ThemeView from "../components/ThemeView";
 
 const GetActiveScreen = ({ route }) => {
+  // -----RETRIEVED DATA-----
+
   const { exercisesArray } = route.params;
+
+  // -----STATES-----
   const [exercises, setExercises] = useState(exercisesArray);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const navigation = useNavigation();
+
+  // -----REFS-----
+
   const carousel = useRef(null);
+
+  // -----STACK NAVIGATOR-----
+  const navigation = useNavigation();
+
+  // -----FUNCTIONS-----
 
   const onFinishExercisePress = () => {
     navigation.navigate("FitnessOptions");
   };
-
-  const onVideoReady = (e) => e.target.pauseVideo();
 
   const renderItem = ({ item, index }) => {
     return (
@@ -62,6 +57,8 @@ const GetActiveScreen = ({ route }) => {
       </View>
     );
   };
+
+  // -----RENDER-----
 
   return (
     <SafeAreaView
@@ -94,6 +91,8 @@ const GetActiveScreen = ({ route }) => {
     </SafeAreaView>
   );
 };
+
+// -----STYLES-----
 
 const styles = StyleSheet.create({
   root: {
