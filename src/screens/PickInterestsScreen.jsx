@@ -54,7 +54,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"Languages"}
-              itemImage={require("../../images/Languages.jpeg")}
+              itemImage={require("../../assets/hobbiesPictures/Languages-modified.png")}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -63,7 +63,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"Art"}
-              itemImage={require("../../images/Art.jpg")}
+              itemImage={require("../../assets/hobbiesPictures/Art-modified.png")}
             />
           </TouchableOpacity>
 
@@ -73,7 +73,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"Gaming"}
-              itemImage={require("../../images/Gaming.jpeg")}
+              itemImage={require("../../assets/hobbiesPictures/Gaming-modified.png")}
             />
           </TouchableOpacity>
 
@@ -83,7 +83,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"Sports"}
-              itemImage={require("../../images/Football.jpeg")}
+              itemImage={require("../../assets/hobbiesPictures/Football-modified.png")}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -92,7 +92,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"Music"}
-              itemImage={require("../../images/Music.jpeg")}
+              itemImage={require("../../assets/hobbiesPictures/Music-modified.png")}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -101,7 +101,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"Coding"}
-              itemImage={require("../../images/Coding.jpg")}
+              itemImage={require("../../assets/hobbiesPictures/Coding-modified.png")}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -110,7 +110,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"Science"}
-              itemImage={require("../../images/Science.jpg")}
+              itemImage={require("../../assets/hobbiesPictures/Science-modified.png")}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -119,7 +119,7 @@ const PickInterestsScreen = () => {
           >
             <MenuItem
               text={"DIY"}
-              itemImage={require("../../images/DIY.jpeg")}
+              itemImage={require("../../assets/hobbiesPictures/DIY-modified.png")}
             />
           </TouchableOpacity>
         </View>
