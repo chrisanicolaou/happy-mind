@@ -1,14 +1,7 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  Animated,
-  Image,
-} from "react-native";
+import { StyleSheet, View, Text, Dimensions, Animated } from "react-native";
 import React, { useRef, useEffect } from "react";
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 const circleWidth = width / 2;
 
 const MeditateScreen = () => {
@@ -32,13 +25,13 @@ const MeditateScreen = () => {
         ]),
         Animated.parallel([
           Animated.timing(textOpacity, {
-            delay: 100,
+            delay: 1000,
             toValue: 0,
-            duration: 300,
+            duration: 200,
             useNativeDriver: true,
           }),
           Animated.timing(translation, {
-            delay: 1000,
+            delay: 1100,
             toValue: 0,
             duration: 4000,
             useNativeDriver: true,
