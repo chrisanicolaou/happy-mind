@@ -6,6 +6,7 @@ import {
   Linking,
   TouchableOpacity,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import React, { useState, useRef, useCallback } from "react";
 import CustomButton from "../components/CustomButton";
@@ -17,6 +18,7 @@ import Carousel from "react-native-snap-carousel";
 import { Button, Card, Paragraph, Title } from "react-native-paper";
 import { WebView } from "react-native-webview";
 import { isValidTimestamp } from "@firebase/util";
+import ThemeView from "../components/ThemeView";
 
 const GetActiveScreen = ({ route }) => {
   const { exercisesArray } = route.params;
@@ -26,7 +28,7 @@ const GetActiveScreen = ({ route }) => {
   const carousel = useRef(null);
 
   const onFinishExercisePress = () => {
-    navigation.navigate("Homepage");
+    navigation.navigate("FitnessOptions");
   };
 
   const onVideoReady = (e) => e.target.pauseVideo();
@@ -65,37 +67,30 @@ const GetActiveScreen = ({ route }) => {
     <SafeAreaView
       style={{
         flex: 1,
-        justifyContent: "center",
       }}
     >
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "column",
-          justifyContent: "center",
-          paddingTop: "7%",
-          paddingBottom: "3%",
-        }}
-      >
-        <Carousel
-          lockScrollWhileSnapping={true}
-          swipeThreshold={10}
-          layout={"default"}
-          ref={carousel}
-          data={exercises}
-          sliderWidth={380}
-          itemWidth={300}
-          renderItem={renderItem}
-          onSnapToItem={(index) => setCurrentIndex(index)}
-        />
-        <Button
-          mode="contained"
-          onPress={onFinishExercisePress}
-          style={styles.button}
-        >
-          Finish Exercising
-        </Button>
-      </View>
+      <ThemeView>
+        <View style={styles.root}>
+          <Carousel
+            lockScrollWhileSnapping={true}
+            swipeThreshold={10}
+            layout={"default"}
+            ref={carousel}
+            data={exercises}
+            sliderWidth={380}
+            itemWidth={300}
+            renderItem={renderItem}
+            onSnapToItem={(index) => setCurrentIndex(index)}
+          />
+          <Button
+            mode="contained"
+            onPress={onFinishExercisePress}
+            style={styles.button}
+          >
+            Finish Exercising
+          </Button>
+        </View>
+      </ThemeView>
     </SafeAreaView>
   );
 };
@@ -103,18 +98,20 @@ const GetActiveScreen = ({ route }) => {
 const styles = StyleSheet.create({
   root: {
     alignItems: "center",
-    paddingTop: 30,
+    justifyContent: "center",
+    paddingTop: 20,
     paddingHorizontal: 10,
+    height: Dimensions.get("window").height - 70,
+    width: Dimensions.get("window").width,
   },
   button: {
     borderWidth: 1,
     borderColor: "rgba(0,0,0,0.2)",
-    alignItems: "center",
     justifyContent: "center",
-    width: "50%",
+    width: 250,
     height: "8%",
     borderRadius: 10,
-    marginLeft: "25%",
+    marginBottom: 15,
   },
   flexWrap: {
     display: "flex",
