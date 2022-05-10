@@ -1,22 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-  SafeAreaView,
-} from "react-native";
-
-import CustomInput from "../components/CustomInput";
-import CustomButton from "../components/CustomButton";
-
-import { auth, db } from "../../firebase";
-import {
-  browserLocalPersistence,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
-import { getDoc, setDoc, doc } from "firebase/firestore";
+import { View, StyleSheet, Dimensions, SafeAreaView } from "react-native";
 import { UserContext } from "../utils/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import { signUpUser } from "../utils/api";
@@ -25,6 +8,12 @@ import { Button, HelperText, TextInput } from "react-native-paper";
 import ThemeView from "../components/ThemeView";
 
 const SignUpScreen = () => {
+  // -----CONTEXTS-----
+
+  const { setUser } = useContext(UserContext);
+
+  // -----STATES-----
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,8 +36,11 @@ const SignUpScreen = () => {
     message: "",
   });
 
+  // -----STACK NAVIGATOR-----
+
   const navigation = useNavigation();
-  const { setUser } = useContext(UserContext);
+
+  // -----FUNCTIONS-----
 
   const checkDisplayName = () => {
     if (!username) {
@@ -138,9 +130,6 @@ const SignUpScreen = () => {
         });
         return;
       }
-
-      //Refactored - see api.js for details
-
       const user = await signUpUser(username, email, password);
       setUser(user);
     } catch (err) {
@@ -150,46 +139,13 @@ const SignUpScreen = () => {
         message: err.message,
       });
     }
-
-    //----------OLD CODE BELOW----------
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     return setDoc(doc(db, "users", email), {
-    //       username: username,
-    //     });
-    //   })
-    //   .then(() => {
-    //     const docRef = doc(db, "users", email);
-    //     return getDoc(docRef);
-    //   })
-    //   .then((docSnap) => {
-    //     setUser(docSnap.data());
-    //     navigation.navigate("Homepage");
-    //   })
-    //   .catch((err) => {
-    //     switch (err.code) {
-    //       case "auth/invalid-email":
-    //         setEmailError("Invalid email!");
-    //         break;
-    //       case "auth/email-already-in-use":
-    //         setEmailError("Email is already in use!");
-    //         break;
-    //       case "auth/weak-password":
-    //         setEmailError("Password must be at least 6 characters!");
-    //         break;
-    //     }
-
-    //     // setEmailError("fire base emailError");
-    //   });
   };
-
-  const onLoginFacebook = () => {};
-
-  const onLoginGoogle = () => {};
 
   const onSignInPressed = () => {
     navigation.navigate("Login");
   };
+
+  // -----RENDER-----
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -273,52 +229,10 @@ const SignUpScreen = () => {
         </ThemeView>
       </KeyboardAwareScrollView>
     </SafeAreaView>
-    // <ScrollView>
-    //   <View style={styles.root}>
-    //     <Text style={styles.title}>Create an Account!</Text>
-    //     <>{emailError === "" ? null : <Text> {emailError} </Text>}</>
-    //     <CustomInput
-    //       placeholder="Display Name"
-    //       value={username}
-    //       setValue={setUsername}
-    //     />
-    //     <CustomInput placeholder="Email" value={email} setValue={setEmail} />
-    //     <CustomInput
-    //       placeholder="Password"
-    //       value={password}
-    //       setValue={setPassword}
-    //       secureTextEntry
-    //     />
-    //     <CustomInput
-    //       placeholder="Repeat Password"
-    //       value={passwordRepeat}
-    //       setValue={setPasswordRepeat}
-    //       secureTextEntry
-    //     />
-    //     <CustomButton text="Register" onPress={onRegisterPressed} />
-
-    //     <CustomButton
-    //       text="Sign Up with Facebook"
-    //       onPress={onLoginFacebook}
-    //       bgColor="#E7EAF4"
-    //       fgColor="#4765A9"
-    //     />
-    //     <CustomButton
-    //       text="Sign Up with Google"
-    //       onPress={onLoginGoogle}
-    //       bgColor="#FAE9EA"
-    //       fgColor="#DD4D44"
-    //     />
-
-    //     <CustomButton
-    //       text="Have an account? Sign in"
-    //       onPress={onSignInPressed}
-    //       type="TERTIARY"
-    //     />
-    //   </View>
-    // </ScrollView>
   );
 };
+
+// -----STYLES-----
 
 const styles = StyleSheet.create({
   root: {
@@ -341,24 +255,6 @@ const styles = StyleSheet.create({
     width: "75%",
     alignSelf: "center",
   },
-  // logo: {
-  //   width: "90%",
-  //   maxWidth: 300,
-  //   maxHeight: 200,
-  // },
-  // title: {
-  //   fontSize: 26,
-  //   fontWeight: "bold",
-  //   color: "#051C60",
-  //   margin: 4,
-  // },
-  // text: {
-  //   color: "grey",
-  //   marginVertical: 30,
-  // },
-  // link: {
-  //   color: "#489CF9",
-  // },
 });
 
 export default SignUpScreen;
