@@ -1,30 +1,39 @@
 import {
   View,
-  Text,
   StyleSheet,
-  ScrollView,
   Linking,
   SafeAreaView,
   Dimensions,
 } from "react-native";
-import React, { useState, useEffect, useRef } from "react";
-import { Avatar, Card, Paragraph, Title } from "react-native-paper";
-import CustomButton from "../components/CustomButton";
-import GestureRecognizer from "react-native-swipe-gestures";
+import React, { useState, useRef } from "react";
+import { Card, Paragraph, Title } from "react-native-paper";
 import Carousel from "react-native-snap-carousel";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
 import ThemeView from "../components/ThemeView";
 
 const HobbySwipeScreen = ({ route }) => {
+  // -----RETRIEVED DATA-----
+
   const { hobbiesArr } = route.params;
+
+  // -----STATES-----
+
   const [currIndex, SetCurrIndex] = useState(0);
   const [hobbies, setHobbies] = useState(hobbiesArr);
-  const carousel = useRef(null);
   const [isViewingDetails, setIsViewingDetails] = useState(false);
+
+  // -----REFS-----
+
+  const carousel = useRef(null);
+
+  // -----STACK NAVIGATOR-----
+
   const navigation = useNavigation();
 
-  const renderItem = (item, index) => {
+  // -----FUNCTIONS-----
+
+  const renderItem = (item) => {
     if (!isViewingDetails || item.index !== currIndex) {
       return (
         <Card onPress={showCardDetails} style={styles.card} elevation={5}>
@@ -97,6 +106,8 @@ const HobbySwipeScreen = ({ route }) => {
     navigation.navigate("PickInterests");
   };
 
+  // -----RENDER-----
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ThemeView>
@@ -127,6 +138,8 @@ const HobbySwipeScreen = ({ route }) => {
     </SafeAreaView>
   );
 };
+
+// -----STYLES-----
 
 const styles = StyleSheet.create({
   root: {

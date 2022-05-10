@@ -1,24 +1,28 @@
 import { StyleSheet, View, SafeAreaView, Dimensions } from "react-native";
 import {
   RadioButton,
-  Avatar,
   Text,
-  Headline,
   Title,
   Button,
   Subheading,
 } from "react-native-paper";
 import React, { useState } from "react";
-import CustomButton from "../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import { fetchExercises } from "../utils/api";
 import { shuffleArray } from "../utils/utils";
 import ThemeView from "../components/ThemeView";
 
 const FitnessOptionsScreen = () => {
+  // -----STATES-----
+
   const [workoutIntensity, setWorkoutIntensity] = useState("light");
   const [workoutType, setWorkoutType] = useState("cardio");
+
+  // -----STACK NAVIGATOR-----
+
   const navigation = useNavigation();
+
+  // -----FUNCTIONS-----
 
   const onWorkoutButtonPress = async () => {
     try {
@@ -28,9 +32,7 @@ const FitnessOptionsScreen = () => {
       );
       shuffleArray(exercisesArray);
       navigation.navigate("GetActive", { exercisesArray: exercisesArray });
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   const changeWorkoutIntensity = (intensity) => {
@@ -40,6 +42,8 @@ const FitnessOptionsScreen = () => {
   const changeWorkoutType = (type) => {
     setWorkoutType(type);
   };
+
+  // -----RENDER-----
 
   return (
     <SafeAreaView>
@@ -119,7 +123,7 @@ const FitnessOptionsScreen = () => {
   );
 };
 
-export default FitnessOptionsScreen;
+// -----STYLES-----
 
 const styles = StyleSheet.create({
   root: {
@@ -144,26 +148,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     width: 110,
   },
-  radioButtonsContainer: {
-    flexDirection: "row",
-    flex: 1,
-    justifyContent: "space-around",
-  },
-  radioButton: {
-    paddingHorizontal: 20,
-    marginBottom: 0.4,
-  },
-  big: {
-    fontSize: 15,
-    flex: 0.15,
-    paddingTop: 0.5,
-    marginBottom: 11,
-  },
-  greenUnderline: {
-    textDecorationLine: "underline",
-    fontWeight: "bold",
-  },
-  text: {
-    paddingBottom: 10,
-  },
 });
+
+export default FitnessOptionsScreen;

@@ -22,8 +22,6 @@ import { theme, darkTheme } from "./src/utils/themes";
 
 const Stack = createNativeStackNavigator();
 
-console.log(DefaultTheme);
-
 const App = () => {
   const [user, setUser] = useState("");
   const [dark, setDark] = useState(false);

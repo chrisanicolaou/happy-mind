@@ -1,37 +1,34 @@
 import {
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
-  Image,
-  ImageBackground,
   SafeAreaView,
   Dimensions,
 } from "react-native";
-import React, { useState, useContext } from "react";
-import { UserContext } from "../utils/UserContext";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { fetchHobbiesByInterest } from "../utils/api";
 import MenuItem from "../components/MenuItem";
 import { shuffleArray } from "../utils/utils";
-import { Button, Card, Headline, Title } from "react-native-paper";
+import { Headline } from "react-native-paper";
 import ThemeView from "../components/ThemeView";
 
 const PickInterestsScreen = () => {
-  const { user } = useContext(UserContext);
+  // -----STACK NAVIGATOR-----
+
   const navigation = useNavigation();
+
+  // -----FUNCTIONS-----
 
   const onInterestPress = async (interest) => {
     try {
       const hobbiesArr = await fetchHobbiesByInterest(interest);
       shuffleArray(hobbiesArr);
       navigation.navigate("HobbySwipe", { hobbiesArr: hobbiesArr });
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
+
+  // -----RENDER-----
 
   return (
     <SafeAreaView
@@ -124,6 +121,8 @@ const PickInterestsScreen = () => {
   );
 };
 
+// -----STYLES-----
+
 const styles = StyleSheet.create({
   root: {
     paddingTop: 20,
@@ -140,22 +139,9 @@ const styles = StyleSheet.create({
     width: "80%",
     marginTop: "2%",
     marginBottom: "5%",
-    backgroundColor: "rgba(100, 20, 200, 0)",
-  },
-  cardContainer: {
-    height: "20%",
-    width: "40%",
-    margin: "5%",
   },
   buttonItem: {
     padding: "3.5%",
-    // backgroundColor: "#9370db",
-  },
-  header: {
-    alignSelf: "center",
-    fontSize: 30,
-    fontFamily: "Bodoni 72",
-    textDecorationLine: "underline",
   },
 });
 
