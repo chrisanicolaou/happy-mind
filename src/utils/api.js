@@ -106,9 +106,7 @@ export const setDisplayName = async (user, displayName) => {
       throw new Error("This is already your display name!");
     }
     await updateProfile(user, { displayName: displayName });
-  } catch (err) {
-    console.log(err.code);
-  }
+  } catch (err) {}
 };
 
 export const setPassword = async (user, password) => {
@@ -136,7 +134,5 @@ export const setEmail = async (user, email) => {
 export const logUserOut = async () => {
   try {
     await signOut(auth);
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };

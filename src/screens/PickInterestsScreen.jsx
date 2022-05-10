@@ -25,9 +25,7 @@ const PickInterestsScreen = () => {
       const hobbiesArr = await fetchHobbiesByInterest(interest);
       shuffleArray(hobbiesArr);
       navigation.navigate("HobbySwipe", { hobbiesArr: hobbiesArr });
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   // -----RENDER-----

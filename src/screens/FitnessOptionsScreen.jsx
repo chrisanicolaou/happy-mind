@@ -32,9 +32,7 @@ const FitnessOptionsScreen = () => {
       );
       shuffleArray(exercisesArray);
       navigation.navigate("GetActive", { exercisesArray: exercisesArray });
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   const changeWorkoutIntensity = (intensity) => {
