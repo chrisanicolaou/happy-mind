@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
 import { DarkContext } from "../utils/DarkContext";
 import { theme, darkTheme } from "../utils/themes";
 
@@ -35,7 +36,6 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 20,
     textAlign: "center",
-    fontFamily: "Avenir-HeavyOblique",
   },
 });
 
