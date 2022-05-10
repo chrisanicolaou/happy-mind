@@ -1,16 +1,11 @@
 import {
   StyleSheet,
-  Text,
   View,
   Dimensions,
   SafeAreaView,
   Image,
 } from "react-native";
 import React, { useState } from "react";
-import CustomInput from "../components/CustomInput";
-import CustomButton from "../components/CustomButton";
-import { auth } from "../../firebase";
-import { sendPasswordResetEmail } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { resetPassword } from "../utils/api";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -18,16 +13,22 @@ import { Button, HelperText, TextInput } from "react-native-paper";
 import ThemeView from "../components/ThemeView";
 
 const ForgotPasswordScreen = () => {
+  // -----STATES-----
+
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState({
     type: "info" || "error",
     visible: false,
     message: "",
   });
+
+  // -----STACK NAVIGATOR-----
+
   const navigation = useNavigation();
 
+  // -----FUNCTIONS-----
+
   const onResetPress = async () => {
-    //Refactored - see api.js for details
     try {
       await resetPassword(email);
       setMessage({
@@ -42,29 +43,13 @@ const ForgotPasswordScreen = () => {
         message: err.message,
       });
     }
-
-    //----------OLD CODE BELOW----------
-    // try {
-    //   await sendPasswordResetEmail(auth, email);
-    //   setMessage("Success! Please check your email.");
-    // } catch (err) {
-    //   switch (err.code) {
-    //     case "auth/missing-email":
-    //       setMessage("You haven't entered an email!");
-    //       break;
-    //     case "auth/invalid-email":
-    //       setMessage("Please enter a valid email address.");
-    //       break;
-    //     case "auth/user-not-found":
-    //       setMessage("That user doesn't appear to exist!");
-    //       break;
-    //   }
-    // }
   };
 
   const onSignInPressed = () => {
     navigation.navigate("Login");
   };
+
+  // -----RENDER-----
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -110,7 +95,7 @@ const ForgotPasswordScreen = () => {
   );
 };
 
-export default ForgotPasswordScreen;
+// -----STYLES-----
 
 const styles = StyleSheet.create({
   root: {
@@ -139,3 +124,5 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
+
+export default ForgotPasswordScreen;
