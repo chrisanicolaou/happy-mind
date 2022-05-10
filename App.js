@@ -18,6 +18,7 @@ import {
   MeditateScreen,
 } from "./src/screens/index";
 import { DarkContext } from "./src/utils/DarkContext";
+import { theme, darkTheme } from "./src/utils/themes";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,37 +27,6 @@ console.log(DefaultTheme);
 const App = () => {
   const [user, setUser] = useState("");
   const [dark, setDark] = useState(false);
-  const theme = {
-    ...DefaultTheme,
-    roundness: 10,
-    colors: {
-      ...DefaultTheme.colors,
-      primary: "#96c5e0",
-      accent: "#C8A7AE",
-      background: "#f6f6f6",
-      text: "black",
-    },
-    animation: {
-      scale: 1.0,
-    },
-  };
-  const darkTheme = {
-    ...DefaultTheme,
-    roundness: 10,
-    dark: true,
-    mode: "exact",
-    colors: {
-      ...DefaultTheme.colors,
-      error: "#975E6A",
-      background: "#312F2F",
-      primary: "#8FAACC",
-      placeholder: "white",
-      text: "white",
-    },
-    animation: {
-      scale: 1.0,
-    },
-  };
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

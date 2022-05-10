@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Image, StyleSheet, Text } from "react-native";
+import { DarkContext } from "../utils/DarkContext";
+import { theme, darkTheme } from "../utils/themes";
 
 const MenuItem = ({ itemImage, text }) => {
+  const { dark } = useContext(DarkContext);
   return (
-    <View style={styles.menuItem}>
+    <View
+      style={
+        dark
+          ? {
+              borderRadius: 10,
+              backgroundColor: "rgba(255,255,255, 0.7)",
+            }
+          : { backgroundColor: "rgba(255,255,255, .01)" }
+      }
+    >
       <Text style={styles.heading}>{text}</Text>
       <Image source={itemImage} style={styles.image} />
     </View>
@@ -11,10 +23,6 @@ const MenuItem = ({ itemImage, text }) => {
 };
 
 const styles = StyleSheet.create({
-  menuItem: {
-    padding: 0,
-    backgroundColor: "rgba(255,255,255, .01)",
-  },
   image: {
     padding: 40,
     paddingLeft: 70,
