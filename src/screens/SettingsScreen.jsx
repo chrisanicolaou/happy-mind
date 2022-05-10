@@ -261,8 +261,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-evenly",
-    paddingBottom: "5%",
-    paddingTop: "5%",
+    paddingTop: 0,
   },
   input: {
     paddingHorizontal: "10%",
