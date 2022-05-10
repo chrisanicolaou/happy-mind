@@ -1,39 +1,30 @@
 import React, { useState, useContext } from "react";
 import {
   View,
-  Text,
   Image,
   StyleSheet,
-  useWindowDimensions,
-  ScrollView,
   Dimensions,
   SafeAreaView,
-  KeyboardAvoidingView,
 } from "react-native";
 import Logo from "../../assets/logo.png";
-import CustomInput from "../components/CustomInput";
-import CustomButton from "../components/CustomButton";
-
-import { auth, db } from "../../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { getDoc, doc } from "firebase/firestore";
-
 import { useNavigation } from "@react-navigation/native";
 import { UserContext } from "../utils/UserContext";
 import { loginUser } from "../utils/api";
-import {
-  Button,
-  DefaultTheme,
-  HelperText,
-  TextInput,
-} from "react-native-paper";
+import { Button, HelperText, TextInput } from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import FadeIn from "react-native-fade-in-image";
 import { DarkContext } from "../utils/DarkContext";
 import ThemeView from "../components/ThemeView";
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState(""); //update from [username, setUsername]
+  // -----CONTEXTS-----
+
+  const { setUser } = useContext(UserContext);
+  const { dark } = useContext(DarkContext);
+
+  // -----STATES-----
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
   const [emailOrPassError, setEmailOrPassError] = useState({
@@ -42,13 +33,13 @@ const LoginScreen = () => {
     message: "",
   });
 
-  // const { height } = useWindowDimensions();
+  // -----STACK NAVIGATOR-----
+
   const navigation = useNavigation();
-  const { setUser } = useContext(UserContext);
-  const { dark } = useContext(DarkContext);
+
+  // -----FUNCTIONS-----
 
   const onLoginPressed = async () => {
-    //Refactored - see api.js for details
     try {
       if (!email) {
         setEmailOrPassError({
@@ -77,44 +68,23 @@ const LoginScreen = () => {
         message: err.message,
       });
     }
-
-    //----------OLD CODE BELOW----------
-    // signInWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     const docRef = doc(db, "users", email);
-    //     return getDoc(docRef);
-    //   })
-    //   .then((docSnap) => {
-    //     setUser(docSnap.data());
-    //     navigation.navigate("Homepage");
-    //   })
-    //   .catch((err) => {
-    //     console.warn(err.code);
-    //     setEmailOrPassError(err.code);
-    //   });
   };
 
   const onForgotPasswordPressed = () => {
     navigation.navigate("ForgotPassword");
   };
 
-  // const onLoginFacebook = () => {};
-
-  // const onLoginGoogle = () => {};
-
   const onSignUpPressed = () => {
     navigation.navigate("SignUp");
   };
+
+  // -----RENDER-----
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
         <ThemeView>
-          <View
-            style={{
-              ...styles.root,
-            }}
-          >
+          <View style={styles.root}>
             <FadeIn
               placeholderStyle={{
                 backgroundColor: dark ? "#312F2F" : "#f6f6f6",
@@ -170,46 +140,14 @@ const LoginScreen = () => {
             >
               Create An Account
             </Button>
-            {/* <>{emailOrPassError ? <Text> {emailOrPassError} </Text> : null}</>
-
-<CustomInput placeholder="Email" value={email} setValue={setEmail} />
-<CustomInput
-placeholder="Password"
-value={password}
-setValue={setPassword}
-secureTextEntry={true}
-/>
-<CustomButton text="Sign In" onPress={onLoginPressed} />
-
-<CustomButton
-text="Forgot password?"
-onPress={onForgotPasswordPressed}
-type="TERTIARY"
-/>
-<CustomButton
-text="Sign In with Facebook"
-onPress={onLoginFacebook}
-bgColor="#E7EAF4"
-fgColor="#4765A9"
-/>
-<CustomButton
-text="Sign In with Google"
-onPress={onLoginGoogle}
-bgColor="#FAE9EA"
-fgColor="#DD4D44"
-/>
-
-<CustomButton
-text="Don't have an account? Create one"
-onPress={onSignUpPressed}
-type="TERTIARY"
-/> */}
           </View>
         </ThemeView>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
+
+// -----STYLES-----
 
 const styles = StyleSheet.create({
   root: {
