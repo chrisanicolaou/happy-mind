@@ -40,7 +40,7 @@ The purpose of Happy Mind is to gently encourage the user into behaviours that w
 
 ## Setup
 
-**Prerequisites**: [Node](https://nodejs.org/en/) (version 16.x.x), [expo CLI](https://docs.expo.dev/get-started/installation/), [expo GO](https://expo.dev/client)
+**Prerequisites**: [Node](https://nodejs.org/en/) (version 16.x.x), [Expo CLI](https://docs.expo.dev/get-started/installation/), [Expo Go](https://expo.dev/client)
 
 First, clone the repo to be able to view our app locally:
 
@@ -112,16 +112,6 @@ In this section, the user would have been presented with a graph showing how the
 ### **More personalised experience**:
 
 Since we already implemented storing information about the user on Firestore, we would have loved to present the user with additional inputs when signing up. This would allow us to create a unique fitness plan for them, as well as present them with unique hobbies based off of their interests when signing up, rather than sectioning the hobbies off into different interests each session.
-
-### **Cleaner UI & navigation**:
-
-Our initial MVP didn't properly consider navigating around the app. As such, during development, we ended up with lots of back buttons and a UI that doesn't look very "app like". With a little more time, we would have loved to remove the Homepage Screen and instead have a bottom appbar that allows the user to navigate through the app that way.
-
-In addition to this, the app needs some polishing - there are a few small visual bugs we would have liked to resolve, as well as including sound effects, music on meditation, and other vfx/sfx improvements.
-
-### **Settings**:
-
-A settings menu to allow the user to customise their [experience](#more-personalised-experience). This would also allow the user to logout - a much needed function that our app currently lacks!
 
 ---
 
