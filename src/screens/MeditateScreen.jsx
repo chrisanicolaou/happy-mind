@@ -1,5 +1,7 @@
-import { StyleSheet, View, Text, Dimensions, Animated } from "react-native";
+import { StyleSheet, View, Dimensions, Animated } from "react-native";
 import React, { useRef, useEffect } from "react";
+import { Text } from "react-native-paper";
+import ThemeView from "../components/ThemeView";
 
 const { width } = Dimensions.get("window");
 const circleWidth = width / 2;
@@ -47,61 +49,63 @@ const MeditateScreen = () => {
   });
 
   return (
-    <View style={styles.container}>
-      <Animated.View
-        style={{
-          width: circleWidth,
-          height: circleWidth,
-          ...StyleSheet.absoluteFillObject,
-          alignItems: "center",
-          justifyContent: "center",
-          opacity: textOpacity,
-        }}
-      >
-        <Text style={{ fontSize: 40, fontWeight: "700" }}> Inhale </Text>
-      </Animated.View>
-      <Animated.View
-        style={{
-          width: circleWidth,
-          height: circleWidth,
-          ...StyleSheet.absoluteFillObject,
-          alignItems: "center",
-          justifyContent: "center",
-          opacity: exhale,
-        }}
-      >
-        <Text style={{ fontSize: 40, fontWeight: "700" }}> Exhale </Text>
-      </Animated.View>
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((item) => {
-        const rotation = translation.interpolate({
-          inputRange: [0, 100],
-          outputRange: [`${item * 45}deg`, `${item * 45 + 360}deg`],
-        });
-        return (
-          <Animated.View
-            key={item}
-            style={{
-              backgroundColor: "purple",
-              opacity: 0.1,
-              width: circleWidth,
-              height: circleWidth,
-              borderRadius: circleWidth / 2,
-              ...StyleSheet.absoluteFillObject,
-              transform: [
-                { translateX: 0 },
+    <ThemeView>
+      <View style={styles.container}>
+        <Animated.View
+          style={{
+            width: circleWidth,
+            height: circleWidth,
+            ...StyleSheet.absoluteFillObject,
+            alignItems: "center",
+            justifyContent: "center",
+            opacity: textOpacity,
+          }}
+        >
+          <Text style={{ fontSize: 40, fontWeight: "700" }}> Inhale </Text>
+        </Animated.View>
+        <Animated.View
+          style={{
+            width: circleWidth,
+            height: circleWidth,
+            ...StyleSheet.absoluteFillObject,
+            alignItems: "center",
+            justifyContent: "center",
+            opacity: exhale,
+          }}
+        >
+          <Text style={{ fontSize: 40, fontWeight: "700" }}> Exhale </Text>
+        </Animated.View>
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((item) => {
+          const rotation = translation.interpolate({
+            inputRange: [0, 100],
+            outputRange: [`${item * 45}deg`, `${item * 45 + 360}deg`],
+          });
+          return (
+            <Animated.View
+              key={item}
+              style={{
+                backgroundColor: "blue",
+                opacity: 0.1,
+                width: circleWidth,
+                height: circleWidth,
+                borderRadius: circleWidth / 2,
+                ...StyleSheet.absoluteFillObject,
+                transform: [
+                  { translateX: 0 },
 
-                {
-                  rotate: rotation,
-                },
-                {
-                  translateY: translation,
-                },
-              ],
-            }}
-          ></Animated.View>
-        );
-      })}
-    </View>
+                  {
+                    rotate: rotation,
+                  },
+                  {
+                    translateY: translation,
+                  },
+                ],
+              }}
+            ></Animated.View>
+          );
+        })}
+      </View>
+    </ThemeView>
   );
 };
 
