@@ -6,7 +6,7 @@ import {
   Dimensions,
   SafeAreaView,
 } from "react-native";
-import Logo from "../../assets/app-logo.png";
+import Logo from "../../assets/happy-mind-logo-removebg-preview.png";
 import { useNavigation } from "@react-navigation/native";
 import { UserContext } from "../utils/UserContext";
 import { loginUser } from "../utils/api";
