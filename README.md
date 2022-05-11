@@ -97,7 +97,7 @@ While not explicitly new tech, we wanted to draw special mention to the followin
 
 ## Our Limitations
 
-From concept to delivery, we only had 6 full days to work on our app. This extremely limiting timeframe forced us to think critically about what we wanted our minimum viable product to be. Since it was important to us that the user would have access to several different core sections of the app, by the time we finished, we were left with a pretty bare app. We originally wanted our app to feel a little more personal, and have a little more depth than what it is now - ultimately just retrieving data from our database.
+From concept to delivery, we only had 7 full days to work on our app. This extremely limiting timeframe forced us to think critically about what we wanted our minimum viable product to be. Since it was important to us that the user would have access to several different core sections of the app, by the time we finished, we were left with a pretty bare app. We originally wanted our app to feel a little more personal, and have a little more depth than what it is now - ultimately just retrieving data from our database.
 
 Below are some features we would have loved to have implemented, given more time.
 
