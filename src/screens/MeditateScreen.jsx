@@ -61,7 +61,7 @@ const MeditateScreen = () => {
             opacity: textOpacity,
           }}
         >
-          <Text style={{ fontSize: 40, fontWeight: "700" }}> Inhale </Text>
+          <Text style={{ fontSize: 40, fontWeight: "800" }}> Inhale </Text>
         </Animated.View>
         <Animated.View
           style={{
@@ -73,7 +73,7 @@ const MeditateScreen = () => {
             opacity: exhale,
           }}
         >
-          <Text style={{ fontSize: 40, fontWeight: "700" }}> Exhale </Text>
+          <Text style={{ fontSize: 40, fontWeight: "800" }}> Exhale </Text>
         </Animated.View>
         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((item) => {
           const rotation = translation.interpolate({
@@ -84,8 +84,8 @@ const MeditateScreen = () => {
             <Animated.View
               key={item}
               style={{
-                backgroundColor: "blue",
-                opacity: 0.1,
+                backgroundColor: "indianred",
+                opacity: 0.15,
                 width: circleWidth,
                 height: circleWidth,
                 borderRadius: circleWidth / 2,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     left: width / 4,
-    top: width / 2,
+    top: width / 1.6,
   },
 });
 
